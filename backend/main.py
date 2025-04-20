@@ -5,7 +5,7 @@ from routers.auth_router import router as auth_router
 from routers.upload_router import router as upload_router
 from backend.routers import admin_router
 
-app = FastAPI()  # <<< CRIA PRIMEIRO O APP
+app = FastAPI()
 
 Base.metadata.create_all(bind=engine)
 
