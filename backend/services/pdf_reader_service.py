@@ -208,12 +208,47 @@ if __name__ == "__main__":
     else:
         print("Por favor, forneça o caminho do arquivo PDF como argumento.")
 
-def extract_delivery_info_from_pdf(file_path: str):
-    """Função de integração para o FastAPI."""
-    try:
-        with open(file_path, 'rb') as arquivo_pdf:
-            texto = extrair_texto_pdf(arquivo_pdf)
-            nfe_data = extrair_nfe_data(texto)
-            return nfe_data
-    except Exception as e:
-        return {"erro": f"Erro ao processar o arquivo: {str(e)}"}
+# Nova função para extração rápida baseada no novo modelo.
+def extract_nfe_fields(texto: str):
+    """Extrai campos essenciais da NF-e."""
+    def buscar(regex, texto, default=None):
+        match = re.search(regex, texto)
+        return match.group(1).strip() if match else default
+
+    data = {
+        "numero_nota": buscar(r'Nº\s+(\d+)', texto),
+        "serie": buscar(r'SÉRIE\s+(\d+)', texto),
+        "chave_acesso": buscar(r'(\d{4}\s\d{4}\s\d{4}\s\d{4}\s\d{4}\s\d{4}\s\d{4}\s\d{4}\s\d{4}\s\d{4}\s\d{4})', texto),
+        "data_emissao": buscar(r'DATA DA EMISSÃO\s+(\d{2}/\d{2}/\d{4})', texto),
+        "natureza_operacao": buscar(r'NATUREZA DE OPERAÇÃO\s+(.+)', texto),
+        "emitente": {
+            "cnpj": buscar(r'EMITENTE.*?CNPJ\s+(\d{2}\.\d{3}\.\d{3}/\d{4}-\d{2})', texto),
+            "nome": buscar(r'EMITENTE\s+(.+)', texto),
+            "endereco": buscar(r'ENDEREÇO\s+(.+)', texto),
+            "municipio": buscar(r'MUNICÍPIO\s+(.+)', texto),
+            "uf": buscar(r'UF\s+([A-Z]{2})', texto)
+        },
+        "destinatario": {
+            "cnpj": buscar(r'DESTINATÁRIO.*?CNPJ\s+(\d{2}\.\d{3}\.\d{3}/\d{4}-\d{2})', texto),
+            "nome": buscar(r'NOME / RAZÃO SOCIAL\s+(.+)', texto),
+            "endereco": buscar(r'ENDEREÇO\s+(.+)', texto),
+            "municipio": buscar(r'MUNICÍPIO\s+(.+)', texto),
+            "uf": buscar(r'UF\s+([A-Z]{2})', texto)
+        },
+        "transporte": {
+            "razao_social": buscar(r'TRANSPORTADOR.*?RAZÃO SOCIAL\s+(.+)', texto),
+            "endereco": buscar(r'ENDEREÇO\s+(.+)', texto),
+            "municipio": buscar(r'MUNICÍPIO\s+(.+)', texto),
+            "uf": buscar(r'UF\s+([A-Z]{2})', texto),
+            "peso_bruto": buscar(r'PESO BRUTO\s+\(Kg\)\s+([\d.,]+)', texto),
+            "peso_liquido": buscar(r'PESO LÍQUIDO\s+\(Kg\)\s+([\d.,]+)', texto)
+        },
+        "valores": {
+            "valor_total_produtos": buscar(r'VALOR TOTAL DOS PRODUTOS\s+([\d.,]+)', texto),
+            "valor_total_nota": buscar(r'VALOR TOTAL DA NOTA\s+([\d.,]+)', texto),
+            "valor_frete": buscar(r'VALOR DO FRETE\s+([\d.,]+)', texto),
+            "valor_icms": buscar(r'VALOR DO ICMS\s+([\d.,]+)', texto),
+            "valor_ipi": buscar(r'VALOR DO IPI\s+([\d.,]+)', texto)
+        }
+    }
+    return data

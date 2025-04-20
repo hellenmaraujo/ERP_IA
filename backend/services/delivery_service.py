@@ -9,5 +9,8 @@ def create_delivery(db: Session, delivery: DeliveryCreate):
     db.refresh(db_delivery)
     return db_delivery
 
-def list_deliveries(db: Session):
+def get_all_deliveries(db: Session):
     return db.query(Delivery).all()
+
+def get_deliveries_by_user(db: Session, user_id: int):
+    return db.query(Delivery).filter(Delivery.user_id == user_id).all()

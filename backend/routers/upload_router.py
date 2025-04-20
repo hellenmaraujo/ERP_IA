@@ -4,7 +4,7 @@ import shutil
 import os
 
 from backend.core.database import get_db
-from services.pdf_reader_service import extract_delivery_info_from_pdf
+from services.pdf_reader_service import extract_nfe_fields, extrair_texto_pdf, formatar_valor
 from services import delivery_service
 from schemas.delivery_schemas import DeliveryCreate
 from backend.routers.auth_router import check_permission
@@ -28,18 +28,20 @@ def upload_pdf(
     with open(file_path, "wb") as buffer:
         shutil.copyfileobj(file.file, buffer)
 
-    extracted_data = extract_delivery_info_from_pdf(file_path)
+    with open(file_path, "rb") as pdf_file:
+        text = extrair_texto_pdf(pdf_file)
+    extracted_data = extract_nfe_fields(text)
 
     if not extracted_data:
         raise HTTPException(status_code=400, detail="Não foi possível extrair dados do PDF")
 
     delivery_data = DeliveryCreate(
         numero_nota=file.filename.split(".")[0],
-        destinatario=extracted_data.get("destinatario", "Destinatário não informado"),
-        endereco=extracted_data.get("endereco", "Endereço não informada"),
-        cidade=extracted_data.get("cidade", "Cidade não informada"),
-        estado=extracted_data.get("estado", "Estado não informado"),
-        peso=extracted_data.get("peso"),
+        destinatario=extracted_data.get("destinatario", {}).get("nome", "Destinatário não informado"),
+        endereco=extracted_data.get("destinatario", {}).get("endereco", "Endereço não informado"),
+        cidade=extracted_data.get("destinatario", {}).get("municipio", "Cidade não informada"),
+        estado=extracted_data.get("destinatario", {}).get("uf", "Estado não informado"),
+        peso=formatar_valor(extracted_data.get("transporte", {}).get("peso_bruto", 0))
     )
 
     created_delivery = delivery_service.create_delivery(db, delivery_data)
