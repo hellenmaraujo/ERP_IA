@@ -1,5 +1,5 @@
 from sqlalchemy import Column, Integer, String, Enum
-from app.core.database import Base
+from backend.core.database import Base
 import enum
 
 class PerfilEnum(str, enum.Enum):

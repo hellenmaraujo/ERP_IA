@@ -3,10 +3,10 @@ from sqlalchemy.orm import Session
 import shutil
 import os
 
-from app.core.database import get_db
-from app.services.pdf_reader_service import extract_delivery_info_from_pdf
-from app.services import delivery_service
-from app.schemas.delivery_schemas import DeliveryCreate
+from backend.core.database import get_db
+from services.pdf_reader_service import extract_delivery_info_from_pdf
+from services import delivery_service
+from schemas.delivery_schemas import DeliveryCreate
 
 router = APIRouter(prefix="/upload", tags=["Upload"])
 
