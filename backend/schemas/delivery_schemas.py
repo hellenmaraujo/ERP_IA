@@ -60,6 +60,8 @@ class DeliveryCreate(BaseModel):
     informacoes_complementares: Optional[str] = None
     tipo_entrega: Optional[TipoEntregaEnum] = TipoEntregaEnum.normal
     prazo_entrega: Optional[datetime] = None
+    latitude: Optional[float] = None
+    longitude: Optional[float] = None
 
 class DeliveryOut(DeliveryCreate):
     id: int

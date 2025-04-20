@@ -6,6 +6,7 @@ import re
 
 from backend.core.database import get_db
 from services.pdf_reader_service import extrair_texto_pdf
+from backend.services.geolocation_service import get_coordinates
 
 def extract_nfe_fields(texto: str):
     """Extrai campos mínimos essenciais da NF-e"""
@@ -86,13 +87,26 @@ def upload_pdf(
     if not extracted_data:
         raise HTTPException(status_code=400, detail="Não foi possível extrair dados do PDF")
 
+    coordenadas = None  # 🔥 aqui estava o problema! corrigido
+    if extracted_data.get("endereco") and extracted_data.get("municipio") and extracted_data.get("uf"):
+        coordenadas = get_coordinates(
+            address=extracted_data.get("endereco"),
+            city=extracted_data.get("municipio"),
+            state=extracted_data.get("uf")
+        )
+
+    latitude = coordenadas[0] if coordenadas else None
+    longitude = coordenadas[1] if coordenadas else None
+
     delivery_data = DeliveryCreate(
         numero_nota=extracted_data.get("numero_nota", "Sem número"),
         destinatario=extracted_data.get("destinatario", "Destinatário não informado"),
         endereco=extracted_data.get("endereco", "Endereço não informado"),
         cidade=extracted_data.get("municipio", "Cidade não informada"),
         estado=extracted_data.get("uf", "Estado não informado"),
-        peso=float(str(extracted_data.get("peso_bruto", "0")).replace(",", ".") or 0)
+        peso=float(str(extracted_data.get("peso_bruto", "0")).replace(",", ".") or 0),
+        latitude=latitude,
+        longitude=longitude
     )
 
     created_delivery = delivery_service.create_delivery(db, delivery_data)

@@ -8,9 +8,10 @@ load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 class Settings(BaseSettings):
-    DATABASE_URL: str
+    DATABASE_URL: str = f"sqlite:///{BASE_DIR.parent / 'erp_log.db'}"
     SECRET_KEY: str
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
+    GOOGLE_MAPS_API_KEY: str
 
     model_config = SettingsConfigDict(
         env_file=str(BASE_DIR.parent / ".env"),

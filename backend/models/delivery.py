@@ -33,6 +33,8 @@ class Delivery(Base):
     cidade = Column(String, nullable=True)
     cep = Column(String, nullable=True)
     estado = Column(String, nullable=True)
+    latitude = Column(Float, nullable=True)
+    longitude = Column(Float, nullable=True)
     cnpj_destinatario = Column(String, nullable=True)
     inscricao_estadual_destinatario = Column(String, nullable=True)
     telefone = Column(String, nullable=True)
