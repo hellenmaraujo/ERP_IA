@@ -1,4 +1,20 @@
+# Ambiente virtual
 venv/
+
+# Caches do Python
 __pycache__/
-*.pyc
+*.py[cod]
+*$py.class
+
+# Arquivos de ambiente
 .env
+
+# Banco de dados SQLite
+*.sqlite3
+*.db
+
+# Configurações do VSCode
+.vscode/
+
+# Arquivos do macOS
+.DS_Store
