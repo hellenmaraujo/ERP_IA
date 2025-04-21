@@ -1,12 +1,26 @@
 import { useState } from 'react';
+import axios from 'axios';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Login:', email, senha);
+    const params = new URLSearchParams();
+    params.append('username', email);
+    params.append('password', senha);
+
+    const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+
+    const response = await axios.post(`${apiUrl}/login`, params, {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Accept': 'application/json',
+      },
+    });
+
+    console.log('Login response:', response.data);
   };
 
   return (

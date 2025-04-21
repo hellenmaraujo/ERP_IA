@@ -2,8 +2,8 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from backend.core.database import get_db
 from backend.routers.auth_router import check_permission
-from schemas.user import UserCreate, UserOut
-from services import user_service
+from backend.schemas.user import UserCreate, UserOut
+from backend.services import user_service
 
 router = APIRouter(prefix="/admin/users", tags=["Admin Users"])
 

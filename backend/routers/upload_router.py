@@ -5,8 +5,11 @@ import os
 import re
 
 from backend.core.database import get_db
-from services.pdf_reader_service import extrair_texto_pdf
+from backend.services.pdf_reader_service import extrair_texto_pdf
 from backend.services.geolocation_service import get_coordinates
+from backend.services import delivery_service
+from backend.schemas.delivery_schemas import DeliveryCreate
+from backend.routers.auth_router import check_permission
 
 def extract_nfe_fields(texto: str):
     """Extrai campos mínimos essenciais da NF-e"""
@@ -56,10 +59,6 @@ def extract_nfe_fields(texto: str):
         "cep": cep,
         "peso_bruto": peso_bruto
     }
-
-from services import delivery_service
-from schemas.delivery_schemas import DeliveryCreate
-from backend.routers.auth_router import check_permission
 
 router = APIRouter(prefix="/upload", tags=["Upload"])
 

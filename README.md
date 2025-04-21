@@ -1,80 +1,82 @@
-# ERP-Log-Pro
+# ERP-Log
 
 Sistema ERP Logístico focado na gestão de entregas, otimização de rotas e acompanhamento de KPIs em tempo real.
 
 ## Estrutura do Projeto
 
 ```
-ERP-LOG-PRO/
+ERP-Log/
 ├── backend/
-│   └── app/
-│       ├── core/
-│       ├── models/
-│       ├── routers/
-│       ├── schemas/
-│       ├── services/
-│       ├── database.py
-│       ├── main.py
-│       └── .env.example
+│   ├── core/
+│   ├── models/
+│   ├── routers/
+│   ├── schemas/
+│   ├── services/
+│   ├── database.py
+│   ├── main.py
+├── frontend/
+│   ├── src/
+│   │   ├── pages/
+│   │   └── App.jsx
+│   ├── public/
+│   └── vite.config.js
 ├── uploaded_files/
-├── venv/
-├── .env
 ├── .gitignore
-├── docker-compose.yml
-└── requirements.txt
+├── requirements.txt
+└── README.md
 ```
 
 ## Funcionalidades Implementadas
 
-- [x] Cadastro e autenticação de usuários (motorista, operacional, administrativo).
-- [x] Upload de arquivos PDF de Notas Fiscais.
-- [x] Extração de dados estruturados de NF-e (dados do emitente, destinatário, valores, transporte, produtos).
-- [x] Registro de entregas na base de dados.
-- [x] Listagem de entregas cadastradas.
-- [x] Organização inicial do backend com FastAPI.
+- [x] Autenticação de usuários por perfil (motorista, operacional, administrativo).
+- [x] Upload de entregas via backend.
+- [x] Login integrado frontend ↔ backend.
+- [x] Estrutura inicial de dashboard em desenvolvimento.
 
 ## Tecnologias Utilizadas
 
-- Python 3.11+
-- FastAPI
-- SQLAlchemy
-- PostgreSQL (via Docker)
-- PyPDF2
-- Uvicorn
-- Docker
+- Backend:
+  - Python 3.11+
+  - FastAPI
+  - SQLAlchemy
+  - PostgreSQL
+  - Uvicorn
+
+- Frontend:
+  - React
+  - Vite
+  - Axios
 
 ## Como Executar Localmente
 
-1. Clone o repositório:
+### Backend
+
 ```bash
-git clone https://github.com/hellenmaraujo/ERP-Log-Pro.git
-cd ERP-Log-Pro
+cd backend
+python -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+uvicorn backend.main:app --reload
 ```
 
-2. Configure o ambiente:
-```bash
-cp backend/app/.env.example backend/app/.env
-```
-Preencha as variáveis do `.env` conforme necessário.
+### Frontend
 
-3. Suba a aplicação usando Docker:
 ```bash
-docker-compose up --build
+cd frontend
+npm install
+npm run dev
 ```
-
-4. Acesse:
-- API via Swagger UI: `http://localhost:8000/docs`
 
 ## Progresso Atual
 
-- Backend com autenticação e CRUD de entregas básico OK.
-- Upload e leitura de PDFs parcialmente implementados (em ajuste para melhor extração).
-- Estrutura pronta para incluir dashboards, KPIs e roteirização otimizada.
+- Backend com autenticação e upload de entregas funcionando.
+- Frontend com tela de login integrada ao backend.
+- Redirecionamento correto após login.
+- Estrutura de dashboard será iniciada.
 
 ## Próximos Passos
 
-- Corrigir parsing de PDFs de NF-e para extrair todos os campos com precisão.
-- Criar estrutura de relatórios e KPIs.
-- Integrar API de mapas para roteirização automática.
-- Desenvolver frontend (React).
-
+- Desenvolver tela de dashboard no frontend.
+- Implementar proteção de rotas autenticadas.
+- Criar exibição de entregas e KPIs no dashboard.
+- Melhorar sistema de alertas e feedbacks de erro.

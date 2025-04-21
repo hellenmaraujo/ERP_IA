@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from backend.core.database import get_db
-from services import delivery_service
-from schemas.delivery_schemas import DeliveryOut
+from backend.services import delivery_service
+from backend.schemas.delivery_schemas import DeliveryOut
 from backend.routers.auth_router import check_permission
 
 router = APIRouter(prefix="/deliveries", tags=["Deliveries"])
