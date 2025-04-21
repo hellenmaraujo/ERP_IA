@@ -137,3 +137,31 @@
 .upload-advance-button:hover {
   background-color: #003366;
 }
+
+
+/* Upload Progress Bar Styles */
+.upload-progress-bar-container {
+  position: relative;
+  background-color: #e9ecef;
+  border-radius: 8px;
+  height: 24px;
+  width: 100%;
+  margin-top: 1rem;
+  overflow: hidden;
+}
+
+.upload-progress-bar {
+  background-color: #00468b;
+  height: 100%;
+  transition: width 0.4s ease;
+}
+
+.upload-progress-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: bold;
+  font-size: 14px;
+  color: #fff;
+}
