@@ -1,0 +1,13 @@
+/* Variáveis globais de cores e espaçamentos */
+:root {
+  --primary-color: #004080; /* Azul SPMax */
+  --secondary-color: #17a2b8; /* Azul Claro */
+  --success-color: #28a745;
+  --warning-color: #ffc107;
+  --danger-color: #dc3545;
+  --light-color: #f5f5f7;
+  --dark-color: #343a40;
+
+  --font-primary: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  --border-radius: 8px;
+}

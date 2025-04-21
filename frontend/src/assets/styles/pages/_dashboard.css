@@ -1,0 +1,34 @@
+@import '../base/_reset.css';
+@import '../base/_variables.css';
+@import '../base/_typography.css';
+@import '../base/_globals.css';
+
+.dashboard-page {
+  display: flex;
+  min-height: 100vh;
+  background-color: var(--light-color);
+}
+
+.dashboard-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--light-color);
+  padding: 2rem;
+  max-width: 100%;
+}
+
+.dashboard-main {
+  max-width: 100%;
+  width: 100%;
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}

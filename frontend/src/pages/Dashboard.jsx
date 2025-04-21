@@ -1,5 +1,11 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Sidebar from '../components/Sidebar';
+import Header from '../components/Header';
+import '../assets/styles/pages/_dashboard.css';
+import Cards from '../components/Dashboard/Cards';
+import Map from '../components/Dashboard/Map';
+import Table from '../components/Dashboard/Table';
 
 function Dashboard() {
   const navigate = useNavigate();
@@ -12,35 +18,19 @@ function Dashboard() {
     }
   }, [navigate]);
 
-  const handleLogout = () => {
-    localStorage.removeItem('token');
-    navigate('/');
-  };
-
   return (
-    <div style={{
-      display: 'flex',
-      flexDirection: 'column',
-      height: '100vh',
-      alignItems: 'center',
-      justifyContent: 'center',
-      fontFamily: 'Arial, sans-serif',
-      fontSize: '24px',
-      fontWeight: 'bold',
-      color: '#004a8d'
-    }}>
-      Bem-vindo ao Dashboard!
-      <button 
-        onClick={handleLogout} 
-        style={{
-          marginTop: '20px',
-          padding: '10px 20px',
-          fontSize: '16px',
-          cursor: 'pointer'
-        }}
-      >
-        Sair
-      </button>
+    <div className="dashboard-page">
+      <Sidebar />
+      <div className="dashboard-content">
+        <Header />
+        <main className="dashboard-main">
+          <Cards />
+          <div className="dashboard-container">
+            <Map />
+            <Table />
+          </div>
+        </main>
+      </div>
     </div>
   );
 }

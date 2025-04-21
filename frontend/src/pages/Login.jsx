@@ -1,10 +1,12 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 function Login() {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const [mensagem, setMensagem] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -23,10 +25,11 @@ function Login() {
         }
       });
   
-      if (response.status === 200) {
-        localStorage.setItem('token', response.data.access_token);
-        window.location.href = '/dashboard';
-      }
+        if (response.status === 200) {
+          localStorage.setItem('token', response.data.access_token);
+          // Redirecionar usando navigate
+          navigate('/dashboard');
+        }
     } catch (error) {
       console.error('Erro no login:', error);
   
