@@ -2,10 +2,10 @@ import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Sidebar from '../components/Sidebar';
 import Header from '../components/Header';
-import '../assets/styles/pages/_dashboard.css';
 import Cards from '../components/Dashboard/Cards';
 import Map from '../components/Dashboard/Map';
 import Table from '../components/Dashboard/Table';
+import '../assets/styles/pages/_dashboard.css';
 
 function Dashboard() {
   const navigate = useNavigate();

@@ -1,0 +1,139 @@
+
+/* Uploads Page Professional Layout Styles */
+
+.uploads-container {
+  background-color: #fff;
+  padding: 2rem 3rem;
+  border-radius: 12px;
+  max-width: 800px;
+  margin: 0 auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.uploads-title {
+  font-size: 24px;
+  font-weight: 700;
+  color: #00468b;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.uploads-container p {
+  text-align: center;
+  color: #6c757d;
+  margin-bottom: 2rem;
+  font-size: 14px;
+}
+
+.upload-zone {
+  border: 2px dashed #4a90e2;
+  border-radius: 12px;
+  padding: 40px 20px;
+  text-align: center;
+  background-color: #f5f8ff;
+  margin-bottom: 2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.upload-zone:hover {
+  background-color: #e6f0ff;
+}
+.hidden {
+  display: none;
+}
+.upload-icon {
+  font-size: 40px;
+  color: #4a90e2;
+  margin-bottom: 1rem;
+}
+.upload-text {
+  font-size: 18px;
+  font-weight: 600;
+  color: #00468b;
+}
+.upload-subtext {
+  font-size: 14px;
+  color: #6c757d;
+}
+
+.date-input-container {
+  text-align: center;
+  margin: 2rem 0;
+}
+.date-input-label {
+  display: block;
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #00468b;
+}
+.upload-input {
+  padding: 12px 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  width: 250px;
+  text-align: center;
+}
+
+.uploads-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+  background-color: #fff;
+}
+.uploads-table th {
+  background-color: #00468b;
+  color: #fff;
+  padding: 12px;
+  text-align: left;
+}
+.uploads-table td {
+  padding: 12px;
+  border-bottom: 1px solid #ccc;
+  font-size: 14px;
+  color: #333;
+}
+.uploads-table tr:hover {
+  background-color: #f0f0f0;
+}
+.remove-btn {
+  background: none;
+  border: none;
+  color: #dc3545;
+  font-weight: bold;
+  cursor: pointer;
+}
+.remove-btn:hover {
+  color: #c82333;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+.cancel-btn, .upload-advance-button {
+  padding: 12px 30px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.3s ease;
+}
+.cancel-btn {
+  background-color: #e9ecef;
+  color: #6c757d;
+}
+.cancel-btn:hover {
+  background-color: #d6d8db;
+}
+.upload-advance-button {
+  background-color: #00468b;
+  color: white;
+}
+.upload-advance-button:hover {
+  background-color: #003366;
+}
