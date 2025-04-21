@@ -1,0 +1,134 @@
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color: #003366;
+  background-color: #F7F7F7; /* Fundo claro */
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  font-weight: 500;
+  color: #003366; /* Azul principal */
+  text-decoration: inherit;
+}
+a:hover {
+  color: #D19C00; /* Amarelo/Ouro hover */
+}
+
+body {
+  margin: 0;
+  display: flex;
+  justify-content: center; /* Alinha horizontalmente */
+  align-items: center;     /* Alinha verticalmente */
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: #F7F7F7;
+}
+
+h1 {
+  font-size: 2.5em;
+  line-height: 1.1;
+  color: #003366; /* Azul principal */
+}
+
+input {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 10px;
+  font-size: 16px;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #003366; /* Azul principal */
+  color: white;
+  cursor: pointer;
+  transition: background-color 0.25s;
+  width: 100%; /* Adicionado para botão ocupar 100% do formulário */
+}
+button:hover {
+  background-color: #D19C00; /* Amarelo/Ouro hover */
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.logo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.logo {
+  width: 150px; /* Ajuste o tamanho do logo conforme necessário */
+}
+
+.divider {
+  width: 40px;
+  height: 2px;
+  background-color: #D19C00; /* Linha divisora dourada */
+  margin: 10px auto 20px;
+}
+
+.welcome-text {
+  font-size: 1.5em;
+  color: #003366; /* Azul principal */
+  margin: 20px 0;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+}
+
+.form-group {
+  margin-bottom: 10px;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px 0;
+  font-size: 16px;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  background-color: transparent;
+  color: #333;
+}
+
+.form-control::placeholder {
+  color: #999;
+}
+
+.btn-login {
+  background-color: #003366; /* Botão azul */
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  width: 100%; /* Adicionado para botão ocupar 100% do formulário */
+}
+
+.btn-login:hover {
+  background-color: #D19C00; /* Hover */
+}
