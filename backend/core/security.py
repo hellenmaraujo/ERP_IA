@@ -1,7 +1,7 @@
 from passlib.context import CryptContext
 from datetime import datetime, timedelta
 from jose import jwt
-from backend.core.config import get_settings
+from core.config import get_settings
 
 settings = get_settings()
 

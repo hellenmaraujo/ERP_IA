@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Sidebar from '../components/Sidebar';
 import Header from '../components/Header';
 import '../assets/styles/pages/_delivery.css';
@@ -6,6 +6,36 @@ import '../assets/styles/pages/_delivery.css';
 const Delivery = () => {
     const [filtersVisible, setFiltersVisible] = useState(true);
     const [selectAll, setSelectAll] = useState(false);
+    const [deliveries, setDeliveries] = useState([]);
+
+    useEffect(() => {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        console.error('Token não encontrado.');
+        return;
+      }
+
+      fetch('http://127.0.0.1:8000/deliveries/', {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Accept': 'application/json'
+        }
+      })
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Falha ao buscar entregas');
+          }
+          return response.json();
+        })
+        .then(data => {
+          if (Array.isArray(data)) {
+            setDeliveries(data);
+          } else {
+            setDeliveries([data]);
+          }
+        })
+        .catch(error => console.error('Erro ao buscar entregas:', error));
+    }, []);
 
     // Toggle filters visibility
     const toggleFilters = () => {
@@ -31,6 +61,13 @@ const Delivery = () => {
                 input.value = '';
             }
         });
+    };
+
+    // Status badge mapping
+    const statusToBadgeClass = {
+      "pendente": "pending",
+      "em rota": "in-route",
+      "entregue": "delivered"
     };
 
     return (
@@ -175,126 +212,36 @@ const Delivery = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" className="custom-checkbox" />
-                                    </td>
-                                    <td>000047301</td>
-                                    <td>KAWAMUKA COMERCIO DE EMBALAGENS LTDA-ME</td>
-                                    <td>Rua São João, 123</td>
-                                    <td>São Paulo</td>
-                                    <td>SP</td>
-                                    <td><span className="status-badge status-pending">Pendente</span></td>
-                                    <td>21/04/2025</td>
-                                    <td>Não atribuído</td>
-                                    <td>
-                                        <button className="action-button" title="Visualizar">
-                                            <i className="fas fa-eye"></i>
-                                        </button>
-                                        <button className="action-button" title="Editar">
-                                            <i className="fas fa-edit"></i>
-                                        </button>
-                                        <button className="action-button" title="Atribuir motorista">
-                                            <i className="fas fa-user-plus"></i>
-                                        </button>
-                                    </td>
+                              {deliveries.map((entrega) => (
+                                <tr key={entrega.id}>
+                                  <td>
+                                    <input type="checkbox" className="custom-checkbox" />
+                                  </td>
+                                  <td>{entrega.numero_nota}</td>
+                                  <td>{entrega.destinatario}</td>
+                                  <td>{entrega.endereco}</td>
+                                  <td>{entrega.cidade}</td>
+                                  <td>{entrega.estado}</td>
+                                  <td>
+                                    <span className={`status-badge status-${statusToBadgeClass[entrega.status] || 'pending'}`}>{entrega.status}</span>
+                                  </td>
+                                  <td>
+                                    {entrega.criado_em ? new Date(entrega.criado_em).toLocaleDateString('pt-BR') : ''}
+                                  </td>
+                                  <td>{"Não atribuído"}</td>
+                                  <td>
+                                    <button className="action-button" title="Visualizar">
+                                      <i className="fas fa-eye"></i>
+                                    </button>
+                                    <button className="action-button" title="Editar">
+                                      <i className="fas fa-edit"></i>
+                                    </button>
+                                    <button className="action-button" title="Atribuir motorista">
+                                      <i className="fas fa-user-plus"></i>
+                                    </button>
+                                  </td>
                                 </tr>
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" className="custom-checkbox" />
-                                    </td>
-                                    <td>000047302</td>
-                                    <td>SUPERMERCADO EXTRA</td>
-                                    <td>Av. Paulista, 1000</td>
-                                    <td>São Paulo</td>
-                                    <td>SP</td>
-                                    <td><span className="status-badge status-in-route">Em rota</span></td>
-                                    <td>20/04/2025</td>
-                                    <td>João Silva</td>
-                                    <td>
-                                        <button className="action-button" title="Visualizar">
-                                            <i className="fas fa-eye"></i>
-                                        </button>
-                                        <button className="action-button" title="Editar">
-                                            <i className="fas fa-edit"></i>
-                                        </button>
-                                        <button className="action-button" title="Rastrear">
-                                            <i className="fas fa-map-marker-alt"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" className="custom-checkbox" />
-                                    </td>
-                                    <td>000047303</td>
-                                    <td>FARMÁCIA SAÚDE</td>
-                                    <td>Rua Augusta, 456</td>
-                                    <td>São Paulo</td>
-                                    <td>SP</td>
-                                    <td><span className="status-badge status-delivered">Entregue</span></td>
-                                    <td>19/04/2025</td>
-                                    <td>Maria Santos</td>
-                                    <td>
-                                        <button className="action-button" title="Visualizar">
-                                            <i className="fas fa-eye"></i>
-                                        </button>
-                                        <button className="action-button" title="Comprovante">
-                                            <i className="fas fa-file-alt"></i>
-                                        </button>
-                                        <button className="action-button" title="Histórico">
-                                            <i className="fas fa-history"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" className="custom-checkbox" />
-                                    </td>
-                                    <td>000047304</td>
-                                    <td>LOJA DE MÓVEIS CASA NOVA</td>
-                                    <td>Av. Brigadeiro, 750</td>
-                                    <td>São Paulo</td>
-                                    <td>SP</td>
-                                    <td><span className="status-badge status-pending">Pendente</span></td>
-                                    <td>21/04/2025</td>
-                                    <td>Não atribuído</td>
-                                    <td>
-                                        <button className="action-button" title="Visualizar">
-                                            <i className="fas fa-eye"></i>
-                                        </button>
-                                        <button className="action-button" title="Editar">
-                                            <i className="fas fa-edit"></i>
-                                        </button>
-                                        <button className="action-button" title="Atribuir motorista">
-                                            <i className="fas fa-user-plus"></i>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <input type="checkbox" className="custom-checkbox" />
-                                    </td>
-                                    <td>000047305</td>
-                                    <td>HOTEL CENTRAL</td>
-                                    <td>Rua XV de Novembro, 89</td>
-                                    <td>Curitiba</td>
-                                    <td>PR</td>
-                                    <td><span className="status-badge status-in-route">Em rota</span></td>
-                                    <td>21/04/2025</td>
-                                    <td>Carlos Oliveira</td>
-                                    <td>
-                                        <button className="action-button" title="Visualizar">
-                                            <i className="fas fa-eye"></i>
-                                        </button>
-                                        <button className="action-button" title="Editar">
-                                            <i className="fas fa-edit"></i>
-                                        </button>
-                                        <button className="action-button" title="Rastrear">
-                                            <i className="fas fa-map-marker-alt"></i>
-                                        </button>
-                                    </td>
-                                </tr>
+                              ))}
                             </tbody>
                         </table>
                     </div>
