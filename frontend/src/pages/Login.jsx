@@ -27,6 +27,9 @@ function Login() {
   
         if (response.status === 200) {
           localStorage.setItem('token', response.data.access_token);
+          if (response.data.perfil) {
+            localStorage.setItem('perfil', response.data.perfil);
+          }
           // Redirecionar usando navigate
           navigate('/dashboard');
         }
