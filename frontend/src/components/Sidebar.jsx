@@ -22,7 +22,7 @@ function Sidebar() {
             </Link>
           </li>
           <li>
-            <Link to="/entregas" className="sidebar-link">
+            <Link to="/deliveries" className="sidebar-link">
               <span className="sidebar-icon">📦</span> Entregas
             </Link>
           </li>
