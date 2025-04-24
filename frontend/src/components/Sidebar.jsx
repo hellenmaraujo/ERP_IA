@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import '../assets/styles/layout/_sidebar.css';
 
 function Sidebar() {
   const navigate = useNavigate();
+  const [collapsed, setCollapsed] = useState(false);
 
   const handleLogout = () => {
     localStorage.removeItem('token');
@@ -11,7 +12,10 @@ function Sidebar() {
   };
 
   return (
-    <aside className="sidebar">
+    <aside className={`sidebar ${collapsed ? 'collapsed' : 'expanded'}`}>
+      <button className="sidebar-toggle" onClick={() => setCollapsed(!collapsed)}>
+        {collapsed ? '➡️' : '⬅️'}
+      </button>
 
       <div className="sidebar-section">
         <div className="sidebar-title">Principal</div>

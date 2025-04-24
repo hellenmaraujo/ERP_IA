@@ -5,6 +5,7 @@ from routers.delivery_router import router as delivery_router
 from routers.auth_router import router as auth_router
 from routers.upload_router import router as upload_router
 from routers import admin_router
+from routers.routing_routers import router as routing_router
 
 app = FastAPI()
 
@@ -25,6 +26,7 @@ app.include_router(delivery_router)
 app.include_router(auth_router)
 app.include_router(upload_router)
 app.include_router(admin_router.router)
+app.include_router(routing_router, prefix="/routing", tags=["Roteirização"])
 
 @app.get("/")
 def root():

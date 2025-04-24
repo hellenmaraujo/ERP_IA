@@ -71,3 +71,60 @@
 .dashboard-content {
   margin-left: 250px;
 }
+
+.sidebar.collapsed {
+  width: 70px;
+}
+
+.sidebar.expanded {
+  width: 250px;
+}
+
+.sidebar-toggle {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+  margin-bottom: 1rem;
+  align-self: flex-end;
+}
+
+
+.sidebar.collapsed .sidebar-title {
+  display: none;
+}
+
+.sidebar.collapsed .sidebar-list li {
+  justify-content: none;
+  text-align: none;
+  width: 80%;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  text-overflow: none;
+  white-space: nowrap;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.sidebar.collapsed .sidebar-list li span.label {
+  display: none !important;
+}
+
+.sidebar-list li .label {
+  display: inline;
+}
+
+.dashboard-content {
+  transition: margin-left 0.3s ease;
+}
+
+.sidebar.collapsed ~ .dashboard-content {
+  margin-left: 70px;
+}
+
+.sidebar.expanded ~ .dashboard-content {
+  margin-left: 250px;
+}

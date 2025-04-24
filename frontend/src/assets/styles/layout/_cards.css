@@ -1,58 +1,201 @@
-.cards {
-  display: flex;
+/* Dashboard Grid Layout */
+.cards,
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
   gap: 1rem;
-  flex-wrap: wrap;
-  margin-bottom: 2rem;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .card {
   background-color: #fff;
-  border: 2px solid;
   border-radius: var(--border-radius);
   padding: 1rem;
-  flex: 1 1 200px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.2s;
+  min-height: 75px;
+  width: 100%;
+  box-sizing: border-box;
+  grid-column: span 4;
+  grid-row: span 4;
+}
+
+.card:hover {
+  transform: translateY(-5px);
 }
 
 .card-content {
   display: flex;
   flex-direction: column;
-  height: 100%;
-  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  overflow: hidden;
 }
 
 .card-header {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
+  gap: 0.3rem;
+  justify-content: center;
+  margin-bottom: 0.3rem;
 }
 
 .card-header h3 {
-  font-size: 1rem;
+  margin: 0;
+  font-size: clamp(0.8rem, 1.5vw, 0.9rem);
+  color: var(--primary-color);
+}
+
+.card-content h3 {
+  font-size: clamp(0.9rem, 1.8vw, 1rem);
+  margin-bottom: 0.5rem;
+  color: var(--primary-color);
+}
+
+.card-value {
+  font-size: clamp(1.2rem, 2.5vw, 1.4rem);
+  font-weight: bold;
+  color: #333;
+  margin: 0.5rem 0;
+}
+
+.card-icon {
+  font-size: clamp(0.9rem, 1.5vw, 1rem);
+  margin-top: 0;
+}
+
+/* Cores específicas para tipos de cards */
+.card-success {
+  border-top: 5px solid var(--success-color);
+}
+
+.card-info {
+  border-top: 5px solid var(--info-color);
+}
+
+.card-primary {
+  border-top: 5px solid var(--primary-color);
+}
+
+.card-warning {
+  border-top: 5px solid var(--warning-color);
+}
+
+.card-trend {
+  display: block;
+  font-size: clamp(0.7rem, 1.2vw, 0.8rem);
+  margin-top: 0.5rem;
+  font-weight: normal;
+}
+
+.card-trend.up {
+  color: var(--success-color);
+}
+
+.card-trend.down {
+  color: var(--warning-color);
+}
+
+.card-trend.neutral {
+  color: var(--primary-color);
+}
+
+/* Gráficos responsivos */
+.chart-container {
+  width: 100%;
+  height: auto;
+  min-height: 300px;
+}
+
+/* Responsividade para telas médias */
+@media (max-width: 1200px) {
+  .cards,
+  .cards-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* Cards de Recomendações */
+.recommendation-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  padding: 1rem;
+  width: 100%;
+  margin-top: 2rem;
+  box-sizing: border-box;
+}
+
+/* Responsividade */
+@media (max-width: 1200px) {
+  .recommendation-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .recommendation-cards {
+    grid-template-columns: 1fr;
+  }
+}
+
+.recommendation-card {
+  background-color: #fff;
+  border-radius: var(--border-radius);
+  padding: 2rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  border: 1px solid #e0e0e0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  min-height: 160px;
+  width: 100%;
+  box-sizing: border-box;
+  transition: transform 0.2s;
+  gap: 1rem;
+  margin: 0.5rem;
+  overflow: hidden;
+  text-align: left;
+  position: relative;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #f0f4f8, #e0e7ff);
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+  color: #333;
+  font-family: 'Arial', sans-serif;
+}
+.recommendation-card:hover {
+  transform: translateY(-5px);
+}
+
+.recommendation-icon {
+  font-size: 1.5rem;
+  margin-bottom: 0.8rem;
+}
+
+.recommendation-title {
+  font-weight: bold;
+  font-size: 1.1rem;
   color: var(--primary-color);
   margin-bottom: 0.5rem;
 }
 
-.card-icon {
-  font-size: 1.2rem;
+.recommendation-description {
+  font-size: 0.95rem;
+  color: #555;
+  margin-bottom: 0.5rem;
 }
 
-.card-body {
-  display: flex;
-  flex-direction: column;
-  margin-top: 0.5rem;
-}
-
-.card-body h2 {
-  font-size: 2rem;
-  color: #000;
-  margin-bottom: 0.3rem;
-}
-
-.card-variation {
-  font-size: 0.85rem;
-  color: #6c757d;
+.recommendation-meta {
+  font-size: 0.8rem;
+  color: #777;
 }

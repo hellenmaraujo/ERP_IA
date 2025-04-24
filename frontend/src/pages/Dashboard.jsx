@@ -31,12 +31,20 @@ function Dashboard() {
   useEffect(() => {
     const token = localStorage.getItem('token');
     const userPerfil = localStorage.getItem('perfil');
-    if (!token) {
-      alert('Você precisa estar logado para acessar esta página.');
+    if (!token || !userPerfil) {
       navigate('/');
+    } else {
+      setPerfil(userPerfil);
     }
-    setPerfil(userPerfil);
   }, [navigate]);
+
+  if (!perfil) {
+    return (
+      <div className="loading-message">
+        Carregando...
+      </div>
+    );
+  }
 
   return (
     <div className="dashboard-page">
@@ -46,13 +54,25 @@ function Dashboard() {
         <main className="dashboard-main">
           {perfil === 'administrativo' && (
             <>
-              <CardsAdmin />
-              <ChartsAdmin />
-              <CardsRecAdmin />
-              <TableMotoristaAdmin />
-              <TableFornecedorAdmin />
+              <div className="cards-grid">
+                <CardsAdmin />
+              </div>
+
+              {/* <div className="charts-grid">
+                <ChartsAdmin />
+              </div> */}
+
+              <div className="tables-grid">
+                <TableMotoristaAdmin />
+                <TableFornecedorAdmin />
+              </div>
+
+              <div className="recommendations-grid">
+                <CardsRecAdmin />
+              </div>
             </>
           )}
+
           {perfil === 'operacional' && (
             <>
               <CardsOperac />
@@ -62,6 +82,7 @@ function Dashboard() {
               </div>
             </>
           )}
+
           {perfil === 'motorista' && (
             <>
               <CardsMot />

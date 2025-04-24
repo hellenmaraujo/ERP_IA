@@ -108,12 +108,13 @@ function CardsRecAdmin() {
       {recomendacoes.map((rec, index) => (
         <div key={index} className={`recommendation-card urgency-${rec.tipo}`}>
           <div className="card-content">
-            <div className="card-header">
-              <h3>{rec.titulo}</h3>
+            <div className="card-icon">
+              {/* Optional icon based on rec.tipo */}
             </div>
-            <div className="card-body">
-              <p>{rec.mensagem}</p>
-              <small>{rec.detalhe}</small>
+            <div className="card-info">
+              <h3 className="recommendation-title">{rec.titulo}</h3>
+              <p className="recommendation-message">{rec.mensagem}</p>
+              <small className="recommendation-detail">{rec.detalhe}</small>
             </div>
           </div>
         </div>
