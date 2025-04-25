@@ -5,12 +5,12 @@ import shutil
 import os
 import re
 
-from core.database import get_db
-from services.pdf_reader_service import extrair_texto_pdf
-from services.geolocation_service import get_coordinates
-from services import delivery_service
-from schemas.delivery_schemas import DeliveryCreate
-from routers.auth_router import check_permission
+from erp_log.core.database import get_db
+from erp_log.common.pdf_reader import extrair_texto_pdf
+from erp_log.modules.routing.routing_geolocation import get_coordinates
+from erp_log.modules.deliveries import deliveries_service
+from erp_log.modules.deliveries.deliveries_schemas import DeliveryCreate
+from erp_log.modules.users.users_router import check_permission
 
 def extract_nfe_fields(texto: str):
     """Extrai campos mínimos essenciais da NF-e"""
@@ -147,7 +147,7 @@ async def upload_pdfs(
             criado_em=None
         )
 
-        delivery_service.create_delivery(db=db, delivery=nova_entrega)
+        deliveries_service.create_delivery(db=db, delivery=nova_entrega)
 
         uploaded_files.append(file.filename)
 

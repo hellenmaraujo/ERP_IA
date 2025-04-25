@@ -1,8 +1,8 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
-from database import get_db
-from schemas.routing_schemas import RoteirizacaoRequest
-from services.optimizer_service import clarke_wright_2opt
+from erp_log.core.database import get_db
+from erp_log.modules.routing.routing_schemas import RoteirizacaoRequest
+from erp_log.modules.routing.routing_optimizer import clarke_wright_2opt
 
 router = APIRouter()
 

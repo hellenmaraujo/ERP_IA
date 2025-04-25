@@ -1,12 +1,12 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
-from schemas.user import UserCreate, UserOut
-from services import user_service
-from core.database import SessionLocal
-from core.security import verify_password, get_password_hash, create_access_token
+from erp_log.modules.users.users_schemas import UserCreate, UserOut
+from erp_log.modules.users import users_service
+from erp_log.core.database import SessionLocal
+from erp_log.core.security import verify_password, get_password_hash, create_access_token
 from fastapi.security import OAuth2PasswordRequestForm, OAuth2PasswordBearer
 from jose import JWTError, jwt
-from core.config import get_settings
+from erp_log.core.config import get_settings
 from typing import Dict
 
 router = APIRouter()
@@ -23,15 +23,15 @@ def get_db():
 
 @router.post("/register", response_model=UserOut)
 def register(user: UserCreate, db: Session = Depends(get_db)):
-    db_user = user_service.get_user_by_email(db, email=user.email)
+    db_user = users_service.get_user_by_email(db, email=user.email)
     if db_user:
         raise HTTPException(status_code=400, detail="Email já registrado")
     
-    return user_service.create_user(db=db, user=user)
+    return users_service.create_user(db=db, user=user)
 
 @router.post("/login")
 def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
-    user = user_service.get_user_by_email(db, email=form_data.username)
+    user = users_service.get_user_by_email(db, email=form_data.username)
     if not user or not verify_password(form_data.password, user.senha_hashed):
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Email ou senha incorretos")
     

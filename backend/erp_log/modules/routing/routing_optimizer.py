@@ -1,9 +1,9 @@
 from typing import List, Tuple
-from schemas.routing_schemas import Entrega, Veiculo
+from erp_log.modules.routing.routing_schemas import Entrega, Veiculo
 import math
 from itertools import combinations
-from utils.distance_matrix import gerar_matriz_google
-from models.roteirizacao import salvar_rotas
+from erp_log.common.distance_matrix import gerar_matriz_google
+from erp_log.modules.routing.routing_models import salvar_rotas
 from sqlalchemy.orm import Session
 
 def distancia(p1, p2):

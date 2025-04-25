@@ -1,11 +1,12 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from core.database import Base, engine
-from routers.delivery_router import router as delivery_router
-from routers.auth_router import router as auth_router
-from routers.upload_router import router as upload_router
-from routers import admin_router
-from routers.routing_routers import router as routing_router
+from erp_log.core.database import Base, engine
+from erp_log.modules.deliveries.deliveries_router import router as delivery_router
+from erp_log.modules.users.users_router import router as auth_router
+from erp_log.modules.deliveries.deliveries_upload_router import router as upload_router
+from erp_log.modules.users.users_admin_router import router as admin_router
+from erp_log.modules.routing.routing_router import router as routing_router
+from erp_log.modules.vehicles.vehicle_router import router as vehicle_router
 
 app = FastAPI()
 
@@ -25,8 +26,9 @@ Base.metadata.create_all(bind=engine)
 app.include_router(delivery_router)
 app.include_router(auth_router)
 app.include_router(upload_router)
-app.include_router(admin_router.router)
+app.include_router(admin_router)
 app.include_router(routing_router, prefix="/routing", tags=["Roteirização"])
+app.include_router(vehicle_router, prefix="/vehicles", tags=["Veículos"])
 
 @app.get("/")
 def root():

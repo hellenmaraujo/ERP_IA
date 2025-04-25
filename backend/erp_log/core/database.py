@@ -1,7 +1,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
-from core.config import get_settings
+from erp_log.core.config import get_settings
 
 Base = declarative_base()
 

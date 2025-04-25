@@ -1,0 +1,31 @@
+# Ambiente de Desenvolvimento ERP_Log
+
+# Pacotes principais do backend
+fastapi==0.111.0
+uvicorn[standard]==0.29.0
+sqlalchemy==2.0.37
+pydantic==2.11.3
+python-multipart==0.0.20
+passlib[bcrypt]==1.7.4
+python-jose[cryptography]==3.4.0
+python-dotenv==1.1.0
+requests==2.32.3
+PyMuPDF==1.24.1
+PyPDF2==3.0.1
+pdfminer.six==20221105
+
+# Ferramentas de desenvolvimento e análise
+jupyterlab==4.2.1
+notebook==7.2.0
+ipykernel==6.29.4
+matplotlib==3.8.4
+seaborn==0.13.2
+pandas==2.2.2
+scikit-learn==1.5.0
+black==24.4.2
+flake8==7.0.0
+isort==5.13.2
+
+# Observação:
+# - Dependências do frontend (Node.js, npm) devem ser instaladas separadamente com npm install no diretório frontend.
+# - Este arquivo é destinado apenas para ambientes de desenvolvimento.

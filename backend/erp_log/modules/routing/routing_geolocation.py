@@ -1,6 +1,6 @@
 import requests
 from typing import Optional, Tuple
-from core.config import get_settings
+from erp_log.core.config import get_settings
 
 settings = get_settings()
 

@@ -2,7 +2,7 @@ from sqlalchemy import Column, String, Float, DateTime, ForeignKey, Integer
 from sqlalchemy.dialects.postgresql import UUID
 import uuid
 from datetime import datetime
-from backend.database import Base
+from erp_log.core.database import Base
 from sqlalchemy.orm import Session
 
 class Rota(Base):
