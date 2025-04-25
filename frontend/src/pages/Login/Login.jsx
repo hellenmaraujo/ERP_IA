@@ -29,6 +29,7 @@ function Login() {
           localStorage.setItem('token', response.data.access_token);
           localStorage.setItem('perfil', response.data.perfil);
           localStorage.setItem('usuario', response.data.nome);
+          localStorage.setItem('nome', response.data.nome);
           window.location.href = '/dashboard';
         }
         

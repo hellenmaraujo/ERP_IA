@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../../assets/styles/layout/_cards.css';
+import '../../assets/styles/layout/_cards.css';
 
 const indicadores = {
   indiceAtraso: 12.5,  // %

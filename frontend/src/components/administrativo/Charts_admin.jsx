@@ -29,7 +29,7 @@ ChartJS.register(
 
 import React from 'react';
 import { Line, Bar, Doughnut } from 'react-chartjs-2';
-import '../../../assets/styles/layout/_charts.css';
+import '../../assets/styles/layout/_charts.css';
 
 function ChartsAdmin() {
 

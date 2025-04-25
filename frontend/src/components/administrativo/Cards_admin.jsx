@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import '../../../assets/styles/layout/_cards.css';
+// import "@/assets/styles/layout/_cards.css";
 
 function CardsAdmin() {
   const [deliveries, setDeliveries] = useState([]);

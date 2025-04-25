@@ -1,8 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Login from './pages/Login';
-import Dashboard from './pages/Dashboard';
-import Uploads from './pages/Uploads'; // <-- tem que importar Uploads!
-import Deliveries from './pages/Delivery';
+import Login from './pages/Login/Login';
+import Dashboard from './pages/Dashboard/Dashboard';
+import Uploads from './pages/Upload/Uploads';
+import Deliveries from './pages/Entregas/Entregas';
 
 function App() {
   return (

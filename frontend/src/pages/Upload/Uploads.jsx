@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import '../assets/styles/pages/_uploads.css';
-import Sidebar from '../components/Sidebar';
-import Header from '../components/Header';
+import '../../assets/styles/pages/_uploads.css';
+import Sidebar from '../../components/common/Sidebar';
+import Header from '../../components/common/Header';
 
 function Uploads() {
   const today = new Date().toISOString().split('T')[0];

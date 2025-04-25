@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import Sidebar from '../components/Sidebar';
-import Header from '../components/Header';
-import '../assets/styles/pages/_delivery.css';
+import Sidebar from '../../components/common/Sidebar';
+import Header from '../../components/common/Header';
+import '../../assets/styles/pages/_delivery.css';
 
-const Delivery = () => {
+const Entregas = () => {
     const [filtersVisible, setFiltersVisible] = useState(true);
     const [selectAll, setSelectAll] = useState(false);
     const [deliveries, setDeliveries] = useState([]);
@@ -270,4 +270,4 @@ const Delivery = () => {
     );
 };
 
-export default Delivery;
+export default Entregas;

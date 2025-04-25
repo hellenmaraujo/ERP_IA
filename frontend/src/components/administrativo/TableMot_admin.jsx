@@ -1,5 +1,5 @@
 import React from 'react';
-import '../../../assets/styles/layout/_table.css';
+import '../../assets/styles/layout/_table.css';
 
 function TableMotoristaAdmin() {
   const motoristas = [
