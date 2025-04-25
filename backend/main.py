@@ -9,6 +9,7 @@ from erp_log.modules.routing.routing_router import router as routing_router
 from erp_log.modules.vehicles.vehicle_router import router as vehicle_router
 from erp_log.modules.fuel.fuel_router import router as fuel_router
 from erp_log.modules.drivers.driver_router import router as driver_router
+from erp_log.modules.route.routes_router import router as route_router
 
 app = FastAPI()
 
@@ -33,6 +34,7 @@ app.include_router(routing_router, prefix="/routing", tags=["Roteirização"])
 app.include_router(vehicle_router, prefix="/vehicles", tags=["Veículos"])
 app.include_router(fuel_router, prefix="/fuel", tags=["Abastecimentos"])
 app.include_router(driver_router, prefix="/drivers", tags=["Motoristas"])
+app.include_router(route_router, prefix="/routes", tags=["Rotas"])
 
 @app.get("/")
 def root():
