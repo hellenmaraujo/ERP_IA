@@ -1,10 +1,9 @@
+// src/contexts/AuthContext.jsx
 import { createContext, useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const navigate = useNavigate();
   const [user, setUser] = useState({ nome: "", perfil: "" });
   const [isLoading, setIsLoading] = useState(true);
 
@@ -14,12 +13,15 @@ export const AuthProvider = ({ children }) => {
     const perfil = localStorage.getItem("perfil");
 
     if (!token || !nome || !perfil) {
-      navigate("/");
+      // Em vez de usar navigate, usamos uma redireção direta
+      if (window.location.pathname !== '/') {
+        window.location.href = '/';
+      }
     } else {
       setUser({ nome, perfil });
     }
     setIsLoading(false);
-  }, [navigate]);
+  }, []);
 
   return (
     <AuthContext.Provider value={{ user, isLoading }}>

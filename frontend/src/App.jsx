@@ -1,18 +1,13 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Login from './pages/Login/Login';
-import Dashboard from './pages/Dashboard/Dashboard';
-import Uploads from './pages/Upload/Uploads';
-import Deliveries from './pages/Entregas/Entregas';
+import { BrowserRouter as Router } from 'react-router-dom';
+import { AuthProvider } from './contexts/AuthContext.jsx';
+import AppRouter from './router/AppRouter';
 
 function App() {
   return (
     <Router>
-      <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/uploads" element={<Uploads />} />
-        <Route path="/deliveries" element={<Deliveries />} />
-      </Routes>
+      <AuthProvider>
+        <AppRouter />
+      </AuthProvider>
     </Router>
   );
 }

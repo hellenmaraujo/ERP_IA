@@ -1,0 +1,58 @@
+.login-container {
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     justify-content: center;
+     height: 100vh;
+     background-color: #f9fafa;
+   }
+   
+   .logo-container {
+     display: flex;
+     align-items: center;
+     margin-bottom: 2rem;
+   }
+   
+   .logo {
+     height: 64px;
+   }
+   
+   .divider {
+     height: 64px;
+     width: 2px;
+     background-color: #ccc;
+     margin-left: 16px;
+   }
+   
+   .welcome-text {
+     font-size: 1.5rem;
+     margin-bottom: 1rem;
+     color: #333;
+   }
+   
+   .login-form {
+     display: flex;
+     flex-direction: column;
+     gap: 1rem;
+     width: 300px;
+   }
+   
+   .form-group {
+     display: flex;
+     flex-direction: column;
+   }
+   
+   .form-control {
+     padding: 10px;
+     border-radius: 4px;
+     border: 1px solid #aaa;
+   }
+   
+   .btn-login {
+     padding: 10px;
+     background-color: #003366;
+     color: white;
+     border: none;
+     border-radius: 4px;
+     cursor: pointer;
+   }
