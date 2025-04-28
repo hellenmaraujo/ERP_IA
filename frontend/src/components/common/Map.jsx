@@ -14,7 +14,7 @@ function Map() {
         <h2 className="map-title">Rastreamento em Tempo Real</h2>
         <div className="map-filters">
           <button className="map-filter-button" onClick={toggleFilters}>
-            Filtros
+            {showFilters ? 'Ocultar Filtros' : 'Filtros'}
           </button>
         </div>
       </div>
@@ -22,6 +22,7 @@ function Map() {
       {showFilters && (
         <div className="map-sidebar">
           <h3>Filtros</h3>
+          {/* Filtros fixos */}
           <div className="filter-category">
             <label>Motoristas</label>
             <select>

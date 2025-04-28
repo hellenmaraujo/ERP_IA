@@ -39,3 +39,38 @@ app.include_router(route_router, prefix="/routes", tags=["Rotas"])
 @app.get("/")
 def root():
     return {"message": "Backend ERP-Log rodando com sucesso!"}
+
+from fastapi import Depends, HTTPException, status
+from fastapi.security import OAuth2PasswordBearer
+from jose import JWTError, jwt
+from pydantic import BaseModel
+
+# Configurações básicas do JWT
+SECRET_KEY = "seusegredoaqui"  # troque para sua chave real
+ALGORITHM = "HS256"
+
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
+
+class UserOut(BaseModel):
+    nome: str
+    perfil: str
+
+def get_current_user(token: str = Depends(oauth2_scheme)):
+    credentials_exception = HTTPException(
+        status_code=status.HTTP_401_UNAUTHORIZED,
+        detail="Não autorizado",
+        headers={"WWW-Authenticate": "Bearer"},
+    )
+    try:
+        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
+        nome = payload.get("sub")
+        perfil = payload.get("perfil")
+        if nome is None or perfil is None:
+            raise credentials_exception
+        return {"nome": nome, "perfil": perfil}
+    except JWTError:
+        raise credentials_exception
+
+@app.get("/auth/me", response_model=UserOut)
+def read_users_me(current_user: dict = Depends(get_current_user)):
+    return current_user

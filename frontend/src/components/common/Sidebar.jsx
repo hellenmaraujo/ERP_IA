@@ -1,23 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import { useAuth } from '../../hooks/useAuth';
 import '../../assets/styles/layout/_sidebar.css';
 
 function Sidebar() {
   const navigate = useNavigate();
+  const { user, logout } = useAuth();
   const [collapsed, setCollapsed] = useState(false);
-  const [perfil, setPerfil] = useState('');
 
-  useEffect(() => {
-    const perfilStorage = localStorage.getItem('perfil');
-    if (perfilStorage) {
-      setPerfil(perfilStorage);
-    }
-  }, []);
+  if (!user) {
+    return null;
+  }
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('perfil');
-    navigate('/');
+    logout();
   };
 
   return (
@@ -34,21 +30,21 @@ function Sidebar() {
               <span className="sidebar-icon">🏠</span> Dashboard
             </Link>
           </li>
-          {(perfil === 'operacional' || perfil === 'administrativo') && (
+          {(user.perfil === 'operacional' || user.perfil === 'administrativo') && (
             <li>
               <Link to="/roteirizacao" className="sidebar-link">
                 <span className="sidebar-icon">🗺️</span> Roteirização
               </Link>
             </li>
           )}
-          {(perfil === 'operacional' || perfil === 'administrativo') && (
+          {(user.perfil === 'operacional' || user.perfil === 'administrativo') && (
             <li>
               <Link to="/upload" className="sidebar-link">
                 <span className="sidebar-icon">📤</span> Uploads
               </Link>
             </li>
           )}
-          {(perfil === 'motorista' || perfil === 'operacional' || perfil === 'administrativo') && (
+          {(user.perfil === 'motorista' || user.perfil === 'operacional' || user.perfil === 'administrativo') && (
             <li>
               <Link to="/entregas" className="sidebar-link">
                 <span className="sidebar-icon">📦</span> Entregas
@@ -60,11 +56,11 @@ function Sidebar() {
 
       <hr className="sidebar-divider" />
 
-      {(perfil === 'operacional' || perfil === 'administrativo') && (
+      {(user.perfil === 'operacional' || user.perfil === 'administrativo') && (
         <div className="sidebar-section">
           <div className="sidebar-title">Gestão</div>
           <ul className="sidebar-list">
-            {perfil === 'administrativo' && (
+            {user.perfil === 'administrativo' && (
               <li>
                 <Link to="/motoristas" className="sidebar-link">
                   <span className="sidebar-icon">🚚</span> Motoristas
@@ -82,7 +78,7 @@ function Sidebar() {
 
       <hr className="sidebar-divider" />
 
-      {perfil === 'administrativo' && (
+      {user.perfil === 'administrativo' && (
         <div className="sidebar-section">
           <div className="sidebar-title">Sistema</div>
           <ul className="sidebar-list">

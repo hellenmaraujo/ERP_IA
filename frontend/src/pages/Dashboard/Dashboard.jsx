@@ -1,18 +1,22 @@
 import React from 'react';
-import { useAuth } from '../../contexts/AuthContext';
+import { useAuth } from '../../hooks/useAuth';
 import Sidebar from '../../components/common/Sidebar';
-import Header from '../../components/common/Header';
-import '../../assets/styles/pages/_dashboard.css';
+// import Header from '../../components/common/Header';
+// import '../../assets/styles/pages/_dashboard.css';
 
-import DashboardAdmin from './Dashboard_administrativo';
-import DashboardOperacional from './Dashboard_operacional';
-import DashboardMotorista from './Dashboard_motorista';
+// import DashboardAdmin from './Dashboard_administrativo';
+// import DashboardOperacional from './Dashboard_operacional';
+// import DashboardMotorista from './Dashboard_motorista';
 
 function Dashboard() {
-  const { user, isLoading } = useAuth();
+  const { user, token } = useAuth();
 
-  if (isLoading || !user.nome || !user.perfil) {
-    return <div className="loading-message">Carregando...</div>;
+  if (!user || !user.nome || !user.perfil || !token) {
+    return (
+      <div className="loading-message" style={{ padding: "2rem", textAlign: "center" }}>
+        Carregando informações do usuário...
+      </div>
+    );
   }
 
   return (
@@ -20,12 +24,12 @@ function Dashboard() {
       <Sidebar />
       <div className="dashboard-content">
         <Header />
-        <main className="dashboard-main">
+        {/* <main className="dashboard-main">
           <h2>Dashboard <strong>{user.perfil}</strong> - {user.nome}</h2>
           {user.perfil === 'administrativo' && <DashboardAdmin />}
           {user.perfil === 'operacional' && <DashboardOperacional />}
           {user.perfil === 'motorista' && <DashboardMotorista />}
-        </main>
+        </main> */}
       </div>
     </div>
   );

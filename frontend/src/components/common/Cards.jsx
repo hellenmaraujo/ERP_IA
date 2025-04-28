@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
+import { useAuth } from '../../hooks/useAuth';
 import '../../assets/styles/layout/_cards.css';
 
 function Cards() {
+  const { token } = useAuth();
   const [deliveries, setDeliveries] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const token = localStorage.getItem('token');
     if (!token) return;
 
     fetch('http://127.0.0.1:8000/deliveries/', {
@@ -17,20 +18,19 @@ function Cards() {
     })
       .then(response => response.json())
       .then(data => {
-        setDeliveries(Array.isArray(data) ? data : [data]);
+        setDeliveries(Array.isArray(data) ? data : []);
       })
       .catch(error => console.error('Erro ao buscar entregas:', error))
       .finally(() => setLoading(false));
-  }, []);
+  }, [token]);
 
-  if (loading) return <div>Carregando...</div>;
+  if (loading) return <div className="cards">Carregando...</div>;
 
   const total = deliveries.length;
   const emTransito = deliveries.filter(d => d.status === "em rota").length;
   const entregues = deliveries.filter(d => d.status === "entregue").length;
   const pendentes = deliveries.filter(d => d.status === "pendente").length;
-
-  const taxaEntregaPrazo = entregues > 0 ? ((entregues / total) * 100).toFixed(1) + "%" : "0%";
+  const taxaEntregaPrazo = total > 0 ? ((entregues / total) * 100).toFixed(1) + "%" : "0%";
 
   return (
     <div className="cards">
