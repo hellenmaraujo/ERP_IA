@@ -1,33 +1,23 @@
-// src/contexts/AuthContext.jsx
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useState } from 'react';
 
-export const AuthContext = createContext();
+export const AuthContext = createContext(null);
 
-export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState({ nome: "", perfil: "" });
-  const [isLoading, setIsLoading] = useState(true);
+export function AuthProvider({ children }) {
+  const [user, setUser] = useState(null);
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    const nome = localStorage.getItem("nome");
-    const perfil = localStorage.getItem("perfil");
+  const login = (userData) => {
+    setUser(userData);
+    localStorage.setItem('user', JSON.stringify(userData));
+  };
 
-    if (!token || !nome || !perfil) {
-      // Em vez de usar navigate, usamos uma redireção direta
-      if (window.location.pathname !== '/') {
-        window.location.href = '/';
-      }
-    } else {
-      setUser({ nome, perfil });
-    }
-    setIsLoading(false);
-  }, []);
+  const logout = () => {
+    setUser(null);
+    localStorage.removeItem('user');
+  };
 
   return (
-    <AuthContext.Provider value={{ user, isLoading }}>
+    <AuthContext.Provider value={{ user, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
-};
-
-export const useAuth = () => useContext(AuthContext);
+}

@@ -1,41 +1,15 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
-import { useAuth } from '../hooks/useAuth';
-
 import Login from '../pages/Login/Login';
 import Dashboard from '../pages/Dashboard/Dashboard';
-import Uploads from '../pages/Upload/Uploads';
-import Entregas from '../pages/Entregas/Entregas';
-import Roteirizacao from '../pages/Roteirizacao/Roteirizacao';
-import Motoristas from '../pages/Motoristas/Motoristas';
-import Veiculos from '../pages/Veiculos/Veiculos';
-import Usuarios from '../pages/Usuarios/Usuarios';
 
-function ProtectedRoute({ children, allowedRoles }) {
-  const { user } = useAuth();
-
-  if (!user) {
-    return <Navigate to="/" replace />;
-  }
-
-  if (!allowedRoles.includes(user.perfil)) {
-    return <Navigate to="/dashboard" replace />;
-  }
-
-  return children;
-}
-
-export default function AppRouter() {
+function AppRouter() {
   return (
     <Routes>
       <Route path="/" element={<Login />} />
-      <Route path="/dashboard" element={<ProtectedRoute allowedRoles={['motorista', 'operacional', 'administrativo']}><Dashboard /></ProtectedRoute>} />
-      <Route path="/upload" element={<ProtectedRoute allowedRoles={['operacional', 'administrativo']}><Uploads /></ProtectedRoute>} />
-      <Route path="/entregas" element={<ProtectedRoute allowedRoles={['motorista', 'operacional', 'administrativo']}><Entregas /></ProtectedRoute>} />
-      <Route path="/roteirizacao" element={<ProtectedRoute allowedRoles={['operacional', 'administrativo']}><Roteirizacao /></ProtectedRoute>} />
-      <Route path="/motoristas" element={<ProtectedRoute allowedRoles={['administrativo']}><Motoristas /></ProtectedRoute>} />
-      <Route path="/veiculos" element={<ProtectedRoute allowedRoles={['operacional', 'administrativo']}><Veiculos /></ProtectedRoute>} />
-      <Route path="/usuarios" element={<ProtectedRoute allowedRoles={['administrativo']}><Usuarios /></ProtectedRoute>} />
+      <Route path="/dashboard" element={<Dashboard />} />
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );
 }
+
+export default AppRouter;

@@ -1,13 +1,202 @@
+/* Importação de fontes */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+
 /* Variáveis globais de cores e espaçamentos */
 :root {
-  --primary-color: #004080; /* Azul SPMax */
-  --secondary-color: #17a2b8; /* Azul Claro */
+  /* Fontes */
+  --font-family-primary: 'Montserrat', Verdana, sans-serif;
+  --font-family-secondary: Verdana, Geneva, Tahoma, sans-serif;
+  
+  /* Cores principais baseadas no logo SPMax */
+  --primary-color: #00468b; /* Azul SPMax - cor principal */
+  --secondary-color: #f39c12; /* Dourado SPMax - cor secundária */
+  --tertiary-color: #003366; /* Azul escuro - cor terciária */
+  
+  /* Variações de cores principais */
+  --primary-light: #1565c0;
+  --primary-dark: #003366;
+  --secondary-light: #ffb74d;
+  --secondary-dark: #e67e22;
+  --light-blue: #4a90e2;    /* Azul mais claro para variações */
+  --dark-blue: #003366;     /* Azul mais escuro para sombras */
+  --light-gold: #ffc851;    /* Dourado mais claro para hover */
+  --dark-gold: #c48e1e;     /* Dourado mais escuro para bordas */
+  --light-gray: #f5f8ff;
+  --mid-gray: #e9ecef;
+  --dark-gray: #6c757d;
+  --white: #ffffff;
+  
+  /* Cores funcionais */
   --success-color: #28a745;
   --warning-color: #ffc107;
   --danger-color: #dc3545;
-  --light-color: #f5f5f7;
-  --dark-color: #343a40;
+  --info-color: #17a2b8;
+  
+  /* Cores neutras */
+  --light-color: #f5f7fa;
+  --light-gray: #e9ecef;
+  --medium-gray: #6c757d;
+  --dark-gray: #343a40;
+  --dark-color: #212529;
+  
+  /* Texto */
+  --text-primary: #212529;
+  --text-secondary: #6c757d;
+  --text-light: #f8f9fa;
+  
+  /* Tamanhos de viewport */
+  --bp-xs: 0;
+  --bp-sm: 576px;
+  --bp-md: 768px;
+  --bp-lg: 992px;
+  --bp-xl: 1200px;
+  --bp-xxl: 1400px;
+  
+  /* Contenedores responsivos */
+  --container-xs: 100%;
+  --container-sm: 540px;
+  --container-md: 720px;
+  --container-lg: 960px;
+  --container-xl: 1140px;
+  --container-xxl: 1320px;
+  
+  /* Espaçamentos responsivos - Mobile First (valores base para telas pequenas) */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-xxl: 3rem;
+  
+  /* Fontes */
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 600;
+  --font-weight-extrabold: 700;
+  
+  /* Tamanhos de fonte responsivos - Mobile First */
+  --font-size-xs: 0.75rem;   /* 12px */
+  --font-size-sm: 0.875rem;  /* 14px */
+  --font-size-md: 1rem;      /* 16px */
+  --font-size-lg: 1.125rem;  /* 18px */
+  --font-size-xl: 1.25rem;   /* 20px */
+  --font-size-xxl: 1.5rem;   /* 24px */
+  
+  /* Espaçamento entre letras */
+  --letter-spacing-tight: -0.025em;
+  --letter-spacing-normal: 0;
+  --letter-spacing-wide: 0.025em;
+  --letter-spacing-wider: 0.05em;
+  --letter-spacing-widest: 0.1em;
+  
+  /* Bordas */
+  --border-radius-sm: 0.25rem;
+  --border-radius: 0.5rem;
+  --border-radius-lg: 0.75rem;
+  
+  /* Sombras */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 4px 12px rgba(0, 0, 0, 0.15);
+  
+  /* Transições */
+  --transition-fast: all 0.2s ease;
+  --transition-normal: all 0.3s ease;
+  --transition-slow: all 0.5s ease;
+  
+  /* Z-indices */
+  --z-index-dropdown: 1000;
+  --z-index-sticky: 1020;
+  --z-index-fixed: 1030;
+  --z-index-modal-backdrop: 1040;
+  --z-index-modal: 1050;
+  --z-index-tooltip: 1060;
+  
+  /* Variáveis de proporção para layouts responsivos */
+  --ratio-1x1: 100%;
+  --ratio-4x3: 75%;
+  --ratio-16x9: 56.25%;
+  --ratio-21x9: 42.86%;
+  
+  /* Grid base - para facilitar a criação de layouts proporcionais */
+  --grid-columns: 12;
+  --grid-gutter: 1.5rem;
+  
+  /* Fatores de escala (usados para calcular tamanhos proporcionais) */
+  --scale-factor: 1;
+}
 
-  --font-primary: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  --border-radius: 8px;
+/* Tablets (sm) */
+@media screen and (min-width: 576px) {
+  :root {
+    --scale-factor: 1.1;
+    --spacing-md: 1.1rem;
+    --spacing-lg: 1.65rem;
+    --spacing-xl: 2.2rem;
+    --spacing-xxl: 3.3rem;
+    
+    --font-size-lg: 1.25rem;
+    --font-size-xl: 1.4rem;
+    --font-size-xxl: 1.65rem;
+  }
+}
+
+/* Tablets maiores (md) */
+@media screen and (min-width: 768px) {
+  :root {
+    --scale-factor: 1.2;
+    --spacing-md: 1.2rem;
+    --spacing-lg: 1.8rem;
+    --spacing-xl: 2.4rem;
+    --spacing-xxl: 3.6rem;
+    
+    --font-size-lg: 1.35rem;
+    --font-size-xl: 1.5rem;
+    --font-size-xxl: 1.8rem;
+  }
+}
+
+/* Desktops (lg) */
+@media screen and (min-width: 992px) {
+  :root {
+    --scale-factor: 1.3;
+    --spacing-md: 1.3rem;
+    --spacing-lg: 1.95rem;
+    --spacing-xl: 2.6rem;
+    --spacing-xxl: 3.9rem;
+    
+    --font-size-lg: 1.4rem;
+    --font-size-xl: 1.6rem;
+    --font-size-xxl: 2rem;
+  }
+}
+
+/* Desktops grandes (xl) */
+@media screen and (min-width: 1200px) {
+  :root {
+    --scale-factor: 1.4;
+    --spacing-md: 1.4rem;
+    --spacing-lg: 2.1rem;
+    --spacing-xl: 2.8rem;
+    --spacing-xxl: 4.2rem;
+    
+    --font-size-lg: 1.45rem;
+    --font-size-xl: 1.7rem;
+    --font-size-xxl: 2.1rem;
+  }
+}
+
+/* Telas extra grandes (xxl) */
+@media screen and (min-width: 1400px) {
+  :root {
+    --scale-factor: 1.5;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2.25rem;
+    --spacing-xl: 3rem;
+    --spacing-xxl: 4.5rem;
+    
+    --font-size-lg: 1.5rem;
+    --font-size-xl: 1.8rem;
+    --font-size-xxl: 2.25rem;
+  }
 }

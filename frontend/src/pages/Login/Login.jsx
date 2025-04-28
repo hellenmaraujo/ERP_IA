@@ -1,75 +1,40 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-// import '../../../assets/styles/pages/_login.css';
+import { useAuth } from '../../hooks/useAuth.jsx';
+import '../../assets/styles/pages/_login.css';
+import Logo from '../../assets/images/logo.png'; // Confirm correct logo path
 
 function Login() {
   const [email, setEmail] = useState('');
-  const [senha, setSenha] = useState('');
-  const [mensagem, setMensagem] = useState('');
+  const [password, setPassword] = useState('');
+  const { login } = useAuth();
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-  
-    const params = new URLSearchParams();
-    params.append('username', email);
-    params.append('password', senha);
-  
-    const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000';
-  
-    try {
-      const response = await axios.post(`${apiUrl}/login`, params, {
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-          'Accept': 'application/json',
-        }
-      });
-  
-        if (response.status === 200) {
-          localStorage.setItem('token', response.data.access_token);
-          localStorage.setItem('perfil', response.data.perfil);
-          localStorage.setItem('usuario', response.data.nome);
-          localStorage.setItem('nome', response.data.nome);
-          window.location.href = '/dashboard';
-        }
-        
-    } catch (error) {
-      console.error('Erro no login:', error);
-  
-      if (error.response && error.response.status === 401) {
-        alert('E-mail ou senha inválidos!');
-      } else {
-        alert('Erro ao tentar fazer login. Código: ' + (error.response?.status || 'Desconhecido'));
-      }
-    }
+    const fakeUser = { nome: 'Admin User', perfil: 'administrativo' };
+    login(fakeUser);
+    navigate('/dashboard');
   };
 
   return (
-    <div className="login-container">
-      <div className="logo-container">
-        <img
-          src="/assets/logo.png"
-          alt="SPMax Transporte e Logística"
-          className="logo"
-        />
-        <div className="divider"></div>
-      </div>
+    <div className="login-page container vh-100 d-flex justify-center align-center">
+      <div className="login-container">
+        <div className="logo-container">
+          <img src={Logo} alt="SPMax Transporte e Logística" className="logo" />
+          <div className="divider"></div>
+        </div>
 
-      <div className="welcome-text">Bem-vindo à Plataforma</div>
+        <div className="welcome-text">Bem-vindo à Plataforma</div>
 
-      {mensagem ? (
-        <div className="redirecting-text">{mensagem}</div>
-      ) : (
-        <form onSubmit={handleSubmit} className="login-form">
+        <form onSubmit={handleSubmit}>
           <div className="form-group">
             <input
               type="email"
-              placeholder="E-mail"
               className="form-control"
+              placeholder="E-mail"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              required
               autoComplete="off"
             />
           </div>
@@ -77,19 +42,16 @@ function Login() {
           <div className="form-group">
             <input
               type="password"
-              placeholder="Senha"
               className="form-control"
-              value={senha}
-              onChange={(e) => setSenha(e.target.value)}
-              required
+              placeholder="Senha"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
           </div>
 
-          <button type="submit" className="btn-login">
-            Entrar
-          </button>
+          <button type="submit" className="btn-login">Entrar</button>
         </form>
-      )}
+      </div>
     </div>
   );
 }
