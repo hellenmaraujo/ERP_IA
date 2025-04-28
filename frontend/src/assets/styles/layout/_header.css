@@ -4,14 +4,14 @@
 /* Header container */
 .header {
   background: var(--white);
-  margin-left: 280px; /* Mesmo valor que a largura do sidebar */
+  margin-left: var(--spacing-xxl); /* Mesmo valor que a largura do sidebar */
   transition: var(--transition-normal);
   padding: var(--spacing-md) var(--spacing-lg);
   box-shadow: var(--shadow);
   border-radius: var(--border-radius);
-  margin-top: var(--spacing-lg);
-  margin-right: var(--spacing-lg);
-  margin-bottom: var(--spacing-lg);
+  margin-top: var(--spacing-md);
+  margin-right: var(--spacing-xs);
+  margin-bottom: var(--spacing-xs);
   height: 80px;
   position: relative;
 }
@@ -51,7 +51,7 @@
   gap: var(--spacing-xs);
   font-size: var(--font-size-xs);
   color: var(--medium-gray);
-  margin-top: var(--spacing-xs);
+  margin-top: var(--spacing-lg);
 }
 
 .breadcrumb-separator {
@@ -63,7 +63,7 @@
 .header-right {
   display: flex;
   align-items: center;
-  gap: var(--spacing-lg);
+  gap: var(--spacing-xs);
 }
 
 /* Ações (notificações, mensagens) */

@@ -1,42 +1,59 @@
-import { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import { useAuth } from '../../hooks/useAuth.jsx';
 import '../../assets/styles/layout/_header.css';
-import { SidebarContext } from '../../contexts/SidebarContext'; // Você precisará criar este contexto
 
-function Header({ pageTitle }) {
-  // Acessando o contexto do sidebar para coordenar layout responsivo
-  const { collapsed } = useContext(SidebarContext);
+const nome = localStorage.getItem('nome');
+const perfil = localStorage.getItem('perfil');
+
+function Header() {
+  const { user } = useAuth();
+  const location = useLocation();
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [pageTitle, setPageTitle] = useState('Dashboard');
+  
+  // Determine page title based on current route
+  useEffect(() => {
+    const path = location.pathname;
+    
+    // Extract page name from path and capitalize first letter
+    const pageName = path.split('/')[1] || 'dashboard';
+    const formattedTitle = pageName.charAt(0).toUpperCase() + pageName.slice(1);
+    
+    setPageTitle(formattedTitle);
+  }, [location]);
+  
+  // Check if sidebar is collapsed
+  useEffect(() => {
+    const checkSidebarState = () => {
+      const sidebarState = localStorage.getItem('sidebarCollapsed');
+      setSidebarCollapsed(sidebarState === 'true');
+    };
+    
+    // Initial check
+    checkSidebarState();
+    
+    // Setup event listener for sidebar state changes
+    window.addEventListener('storage', checkSidebarState);
+    
+    // Clean up
+    return () => {
+      window.removeEventListener('storage', checkSidebarState);
+    };
+  }, []);
 
   return (
-    <header className={`header ${collapsed ? 'header-expanded' : ''}`}>
+    <header className={`header ${sidebarCollapsed ? 'header-expanded' : ''}`}>
       <div className="header-content">
         <div className="header-left">
-          <h1 className="header-title">{pageTitle || 'Dashboard'}</h1>
-          <div className="header-breadcrumb">
-            <span>Home</span>
-            <span className="breadcrumb-separator">›</span>
-            <span>{pageTitle || 'Dashboard'}</span>
-          </div>
+          <h1 className="header-title">{pageTitle}</h1>
         </div>
-
+        
         <div className="header-right">
-          <div className="header-actions">
-            <button className="action-button" aria-label="Notificações">
-              <i className="notification-icon">🔔</i>
-              <span className="notification-badge">3</span>
-            </button>
-            
-            <button className="action-button" aria-label="Mensagens">
-              <i className="message-icon">✉️</i>
-            </button>
-          </div>
-
-          <div className="header-user">
+          <div className="user-section">
             <div className="user-info">
-              <span className="user-name">Usuário Admin</span>
-              <span className="user-role">Administrador</span>
-            </div>
-            <div className="user-avatar">
-              <img src="/avatar_placeholder.png" alt="Avatar do usuário" />
+              <div className="user-name">{nome || 'Usuário'}</div>
+              <div className="user-role">{perfil || 'Perfil'}</div>
             </div>
           </div>
         </div>

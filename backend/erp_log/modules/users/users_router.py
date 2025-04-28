@@ -9,7 +9,7 @@ from jose import JWTError, jwt
 from erp_log.core.config import get_settings
 from typing import Dict
 
-router = APIRouter()
+router = APIRouter(prefix="/auth", tags=["Autenticação"])
 settings = get_settings()
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/login")
@@ -35,7 +35,7 @@ def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depend
     if not user or not verify_password(form_data.password, user.senha_hashed):
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Email ou senha incorretos")
     
-    access_token = create_access_token(data={"sub": user.email, "perfil": user.perfil})
+    access_token = create_access_token(data={"sub": user.email, "nome": user.nome, "perfil": user.perfil})
     return {"access_token": access_token, "token_type": "bearer"}
 
 def get_current_user(token: str = Depends(oauth2_scheme)) -> Dict[str, str]:

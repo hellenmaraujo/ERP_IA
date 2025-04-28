@@ -8,9 +8,9 @@ function Dashboard() {
       <Sidebar />
       <div className="dashboard-main">
         <Header />
-        <main className="dashboard-content">
+        <div className="dashboard-content">
           <h1>Conteúdo do Dashboard</h1>
-        </main>
+        </div>
       </div>
     </div>
   );
