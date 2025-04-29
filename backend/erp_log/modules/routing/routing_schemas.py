@@ -27,3 +27,22 @@ class RotaResumoOut(BaseModel):
 
     class Config:
         from_attributes = True
+
+class EntregaNaRotaOut(BaseModel):
+    entrega_id: int
+    endereco: str
+    prazo_entrega: datetime
+    status: str
+    ordem: int
+
+class RotaDetalheOut(BaseModel):
+    id: UUID
+    veiculo: str
+    distancia_total: float
+    tempo_total: float
+    custo_total: float
+    data_criacao: datetime
+    entregas: List[EntregaNaRotaOut]
+
+    class Config:
+        from_attributes = True
