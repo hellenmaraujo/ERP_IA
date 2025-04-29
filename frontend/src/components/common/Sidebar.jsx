@@ -1,11 +1,18 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../../assets/styles/layout/_sidebar.css';
 import Logo from '../../assets/images/logo.png'; 
 
 function Sidebar() {
   // Estado para controlar se o sidebar está colapsado ou não
   const [collapsed, setCollapsed] = useState(localStorage.getItem('sidebarState') === 'collapsed');
+
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.clear();
+    navigate('/');
+  };
 
   // Efeito para persistir o estado no localStorage
   useEffect(() => {
@@ -36,6 +43,12 @@ function Sidebar() {
             <Link to="/deliveries">
               <i className="menu-icon">🚚</i>
               <span>Entregas</span>
+            </Link>
+          </li>
+          <li>
+            <Link to="/upload">
+              <i className="menu-icon">🗂️</i>
+              <span>Upload</span>
             </Link>
           </li>
         </ul>
@@ -78,7 +91,7 @@ function Sidebar() {
       </nav>
       
       <div className="sidebar-logout">
-        <button className="btn-logout">
+        <button className="btn-logout" onClick={handleLogout}>
           <i className="logout-icon">🚪</i>
           <span>Sair</span>
         </button>

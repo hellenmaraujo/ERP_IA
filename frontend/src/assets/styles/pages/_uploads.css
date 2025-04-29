@@ -1,0 +1,246 @@
+/* Uploads Page Professional Layout Styles - Otimizado */
+
+.uploads-container {
+     background-color: var(--white);
+     padding: var(--spacing-4, 1.5rem);
+     border-radius: 12px;
+     max-width: 700px;
+     margin: 0 auto;
+     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+   }
+   
+   .uploads-title {
+     font-size: var(--font-size-xl, 22px);
+     font-weight: 700;
+     color: var(--primary-color);
+     text-align: center;
+     margin-bottom: var(--spacing-2, 0.8rem);
+   }
+   
+   .uploads-container p {
+     text-align: center;
+     color: var(--text-secondary);
+     margin-bottom: var(--spacing-3, 1.2rem);
+     font-size: var(--font-size-sm, 14px);
+   }
+   
+   .upload-zone {
+     border: 2px dashed var(--light-blue);
+     border-radius: 12px;
+     padding: var(--spacing-4, 25px) var(--spacing-3, 15px);
+     text-align: center;
+     background-color: var(--light-gray);
+     margin-bottom: var(--spacing-4, 1.5rem);
+     cursor: pointer;
+     transition: all 0.3s ease;
+   }
+   
+   .upload-zone:hover {
+     background-color: var(--secondary-light);
+   }
+   
+   .hidden {
+     display: none;
+   }
+   
+   .upload-icon {
+     font-size: var(--font-size-xxl, 32px);
+     color: var(--light-blue);
+     margin-bottom: var(--spacing-1, 0.5rem);
+   }
+   
+   .upload-text {
+     font-size: var(--font-size-base, 16px);
+     font-weight: 600;
+     color: var(--primary-color);
+     margin-bottom: var(--spacing-1, 0.3rem);
+   }
+   
+   .upload-subtext {
+     font-size: var(--font-size-xs, 13px);
+     color: var(--text-secondary);
+   }
+   
+   .date-input-container {
+     text-align: center;
+     margin: var(--spacing-3, 1.2rem) 0;
+   }
+   
+   .date-input-label {
+     display: block;
+     font-size: var(--font-size-sm, 15px);
+     font-weight: 600;
+     margin-bottom: var(--spacing-1, 0.4rem);
+     color: var(--primary-color);
+   }
+   
+   .upload-input {
+     padding: var(--spacing-2, 10px) var(--spacing-3, 16px);
+     border: 1px solid var(--medium-gray);
+     border-radius: 8px;
+     font-size: var(--font-size-sm, 15px);
+     width: 220px;
+     text-align: center;
+   }
+   
+   .files-list-container {
+     margin-top: var(--spacing-2, 1rem);
+   }
+   
+   .uploads-subtitle {
+     font-size: var(--font-size-base, 16px);
+     font-weight: 600;
+     color: var(--primary-color);
+     margin-bottom: var(--spacing-2, 0.8rem);
+   }
+   
+   .uploads-table {
+     width: 100%;
+     border-collapse: collapse;
+     margin-top: var(--spacing-1, 0.5rem);
+     background-color: var(--white);
+   }
+   
+   .uploads-table th {
+     background-color: var(--primary-color);
+     color: var(--white);
+     padding: var(--spacing-2, 10px);
+     text-align: left;
+     font-size: var(--font-size-sm, 14px);
+   }
+   
+   .uploads-table td {
+     padding: var(--spacing-2, 10px);
+     border-bottom: 1px solid #e0e0e0;
+     font-size: var(--font-size-xs, 13px);
+     color: #333;
+   }
+   
+   .uploads-table tr:hover {
+     background-color: var(--light-color);
+   }
+   
+   .remove-btn {
+     background: none;
+     border: none;
+     color: var(--danger-color);
+     font-weight: bold;
+     cursor: pointer;
+     font-size: var(--font-size-xs, 13px);
+   }
+   
+   .remove-btn:hover {
+     color: #c82333;
+   }
+   
+   .action-buttons {
+     display: flex;
+     justify-content: center;
+     gap: var(--spacing-2, 1rem);
+     margin-top: var(--spacing-4, 1.5rem);
+   }
+   
+   .cancel-btn, .upload-advance-button {
+     padding: var(--spacing-2, 10px) var(--spacing-5, 24px);
+     border-radius: 8px;
+     font-size: var(--font-size-sm, 15px);
+     font-weight: bold;
+     cursor: pointer;
+     border: none;
+     transition: background-color 0.3s ease;
+   }
+   
+   .cancel-btn {
+     background-color: var(--mid-gray);
+     color: var(--text-secondary);
+   }
+   
+   .cancel-btn:hover {
+     background-color: #d6d8db;
+   }
+   
+   .upload-advance-button {
+     background-color: var(--primary-color);
+     color: var(--white);
+   }
+   
+   .upload-advance-button:hover {
+     background-color: var(--primary-dark);
+   }
+   
+   /* Upload Progress Bar Styles */
+   .upload-progress-bar-container {
+     position: relative;
+     background-color: var(--mid-gray);
+     border-radius: 8px;
+     height: 20px;
+     width: 100%;
+     margin: var(--spacing-2, 1rem) 0;
+     overflow: hidden;
+   }
+   
+   .upload-progress-bar {
+     background-color: var(--primary-color);
+     height: 100%;
+     transition: width 0.4s ease;
+   }
+   
+   .upload-progress-text {
+     position: absolute;
+     top: 50%;
+     left: 50%;
+     transform: translate(-50%, -50%);
+     font-weight: bold;
+     font-size: var(--font-size-xs, 12px);
+     color: var(--white);
+   }
+   
+   /* Ajustes adicionais para compactar o layout */
+   .dashboard-main {
+     padding: var(--spacing-2, 1rem);
+   }
+   
+   /* Se existir um header na página */
+   .header {
+     margin-bottom: var(--spacing-2, 1rem);
+   }
+   
+   /* Removendo margin-bottom adicional se existir */
+   .uploads-container > * {
+     margin-bottom: var(--spacing-2, 0.8rem);
+   }
+   
+   .uploads-container > *:last-child {
+     margin-bottom: 0;
+   }
+. 
+@media (max-width: 768px) {
+  .uploads-container {
+    max-width: 90%;
+    padding: var(--spacing-3, 1rem);
+  }
+
+  .upload-input {
+    width: 100%;
+  }
+
+  .uploads-table th,
+  .uploads-table td {
+    font-size: 12px;
+    padding: 6px;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .cancel-btn,
+  .upload-advance-button {
+    width: 100%;
+  }
+
+  .upload-zone {
+    padding: 20px 10px;
+  }
+}

@@ -1,0 +1,448 @@
+/* ========================================
+   MAP COMPONENT STYLING
+   ======================================== */
+
+   @import url('../base/_variables.css');
+   @import url('../base/_responsive.css');
+   
+   /* Map Container */
+   .map-container {
+     position: relative;
+     width: 100%;
+     height: 500px;
+     background-color: #f8f9fa;
+     border-radius: 8px;
+     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+     margin-bottom: 2rem;
+     overflow: hidden;
+   }
+   
+   /* Map Canvas - where the actual map is rendered */
+   .map-canvas {
+     width: 100%;
+     height: 100%;
+   }
+   
+   /* Map Header */
+   .map-header {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     padding: 1rem;
+     background-color: #fff;
+     border-bottom: 1px solid #e9ecef;
+     z-index: 10;
+   }
+   
+   .map-title {
+     font-size: 1.25rem;
+     font-weight: 600;
+     color: #343a40;
+     margin: 0;
+   }
+   
+   .map-actions {
+     display: flex;
+     gap: 0.5rem;
+   }
+   
+   .map-btn {
+     padding: 0.5rem 0.75rem;
+     font-size: 0.875rem;
+     border-radius: 4px;
+     border: none;
+     background-color: #f8f9fa;
+     color: #495057;
+     cursor: pointer;
+     display: flex;
+     align-items: center;
+     gap: 0.5rem;
+     transition: all 0.2s ease;
+   }
+   
+   .map-btn:hover {
+     background-color: #e9ecef;
+   }
+   
+   .map-btn-primary {
+     background-color: #0d6efd;
+     color: #fff;
+   }
+   
+   .map-btn-primary:hover {
+     background-color: #0b5ed7;
+   }
+   
+   /* Map Controls - sidebar or overlay with options */
+   .map-controls {
+     position: absolute;
+     top: 4rem;
+     right: 1rem;
+     width: 300px;
+     max-width: calc(100% - 2rem);
+     background-color: #fff;
+     border-radius: 8px;
+     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+     z-index: 20;
+     padding: 1rem;
+     transition: transform 0.3s ease, opacity 0.3s ease;
+   }
+   
+   .map-controls.collapsed {
+     transform: translateX(calc(100% + 1rem));
+     opacity: 0;
+   }
+   
+   .map-controls-header {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     margin-bottom: 1rem;
+   }
+   
+   .map-controls-title {
+     font-size: 1rem;
+     font-weight: 600;
+     color: #343a40;
+     margin: 0;
+   }
+   
+   .map-controls-toggle {
+     background: none;
+     border: none;
+     cursor: pointer;
+     color: #6c757d;
+     padding: 0.25rem;
+   }
+   
+   .map-controls-body {
+     display: flex;
+     flex-direction: column;
+     gap: 1rem;
+   }
+   
+   /* Map Filter Groups */
+   .map-filter-group {
+     display: flex;
+     flex-direction: column;
+     gap: 0.5rem;
+   }
+   
+   .map-filter-label {
+     font-size: 0.875rem;
+     font-weight: 600;
+     color: #495057;
+   }
+   
+   .map-filter-select {
+     padding: 0.5rem;
+     border-radius: 4px;
+     border: 1px solid #ced4da;
+     font-size: 0.875rem;
+     width: 100%;
+   }
+   
+   /* Map Markers */
+   .map-marker-tooltip {
+     position: absolute;
+     background-color: #fff;
+     border-radius: 4px;
+     padding: 0.5rem 0.75rem;
+     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+     z-index: 30;
+     max-width: 200px;
+     pointer-events: none;
+   }
+   
+   .marker-tooltip-title {
+     font-size: 0.875rem;
+     font-weight: 600;
+     color: #343a40;
+     margin: 0 0 0.25rem 0;
+   }
+   
+   .marker-tooltip-info {
+     font-size: 0.75rem;
+     color: #6c757d;
+     margin: 0;
+   }
+   
+   /* Custom Map Markers */
+   .map-marker {
+     width: 32px;
+     height: 32px;
+     position: relative;
+     cursor: pointer;
+   }
+   
+   .map-marker-icon {
+     width: 100%;
+     height: 100%;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     border-radius: 50%;
+     color: #fff;
+     font-size: 1rem;
+   }
+   
+   .marker-delivery {
+     background-color: #0d6efd;
+   }
+   
+   .marker-vehicle {
+     background-color: #198754;
+   }
+   
+   .marker-alert {
+     background-color: #dc3545;
+   }
+   
+   .marker-warning {
+     background-color: #ffc107;
+   }
+   
+   /* Map Legend */
+   .map-legend {
+     position: absolute;
+     bottom: 1rem;
+     left: 1rem;
+     background-color: #fff;
+     border-radius: 4px;
+     padding: 0.75rem;
+     box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+     z-index: 20;
+     max-width: 250px;
+   }
+   
+   .map-legend-title {
+     font-size: 0.875rem;
+     font-weight: 600;
+     color: #343a40;
+     margin: 0 0 0.5rem 0;
+   }
+   
+   .map-legend-items {
+     display: flex;
+     flex-direction: column;
+     gap: 0.5rem;
+   }
+   
+   .map-legend-item {
+     display: flex;
+     align-items: center;
+     gap: 0.5rem;
+     font-size: 0.75rem;
+     color: #495057;
+   }
+   
+   .legend-color {
+     width: 12px;
+     height: 12px;
+     border-radius: 50%;
+   }
+   
+   /* Map Loading State */
+   .map-loading {
+     position: absolute;
+     top: 0;
+     left: 0;
+     width: 100%;
+     height: 100%;
+     background-color: rgba(255,255,255,0.8);
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     z-index: 100;
+   }
+   
+   .map-loading-spinner {
+     width: 40px;
+     height: 40px;
+     border: 3px solid rgba(0,0,0,0.1);
+     border-top: 3px solid #0d6efd;
+     border-radius: 50%;
+     animation: spin 1s linear infinite;
+   }
+   
+   @keyframes spin {
+     0% { transform: rotate(0deg); }
+     100% { transform: rotate(360deg); }
+   }
+   
+   /* Route Line Styles */
+   .route-primary {
+     stroke: #0d6efd;
+     stroke-width: 3;
+     fill: none;
+     stroke-linecap: round;
+     stroke-linejoin: round;
+   }
+   
+   .route-alternative {
+     stroke: #6c757d;
+     stroke-width: 2;
+     fill: none;
+     stroke-dasharray: 5, 5;
+     stroke-linecap: round;
+     stroke-linejoin: round;
+   }
+   
+   .route-completed {
+     stroke: #198754;
+     stroke-width: 3;
+     fill: none;
+     stroke-linecap: round;
+     stroke-linejoin: round;
+   }
+   
+   /* Map Infobox (expanded marker info) */
+   .map-infobox {
+     position: absolute;
+     bottom: 1rem;
+     right: 1rem;
+     background-color: #fff;
+     border-radius: 8px;
+     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+     padding: 1.25rem;
+     z-index: 25;
+     width: 300px;
+     max-width: calc(100% - 2rem);
+     transform-origin: bottom right;
+     animation: popup 0.3s ease;
+   }
+   
+   @keyframes popup {
+     0% { transform: scale(0.8); opacity: 0; }
+     100% { transform: scale(1); opacity: 1; }
+   }
+   
+   .infobox-header {
+     display: flex;
+     justify-content: space-between;
+     align-items: flex-start;
+     margin-bottom: 1rem;
+   }
+   
+   .infobox-title {
+     font-size: 1.125rem;
+     font-weight: 600;
+     color: #343a40;
+     margin: 0;
+   }
+   
+   .infobox-close {
+     background: none;
+     border: none;
+     color: #6c757d;
+     cursor: pointer;
+     padding: 0.25rem;
+     font-size: 1.125rem;
+   }
+   
+   .infobox-content {
+     display: flex;
+     flex-direction: column;
+     gap: 0.75rem;
+   }
+   
+   .infobox-detail {
+     display: flex;
+     align-items: center;
+     gap: 0.5rem;
+   }
+   
+   .infobox-label {
+     font-size: 0.75rem;
+     color: #6c757d;
+     min-width: 80px;
+   }
+   
+   .infobox-value {
+     font-size: 0.875rem;
+     color: #343a40;
+     font-weight: 500;
+   }
+   
+   .infobox-actions {
+     display: flex;
+     gap: 0.75rem;
+     margin-top: 1rem;
+   }
+   
+   .infobox-btn {
+     padding: 0.5rem 0.75rem;
+     border-radius: 4px;
+     font-size: 0.875rem;
+     border: none;
+     cursor: pointer;
+     flex: 1;
+     transition: background-color 0.2s ease;
+   }
+   
+   .infobox-btn-primary {
+     background-color: #0d6efd;
+     color: #fff;
+   }
+   
+   .infobox-btn-primary:hover {
+     background-color: #0b5ed7;
+   }
+   
+   .infobox-btn-secondary {
+     background-color: #f8f9fa;
+     color: #495057;
+   }
+   
+   .infobox-btn-secondary:hover {
+     background-color: #e9ecef;
+   }
+   
+   /* Responsive Adjustments */
+   @media (max-width: 768px) {
+     .map-container {
+       height: 400px;
+     }
+     
+     .map-controls {
+       top: auto;
+       bottom: 1rem;
+       right: 1rem;
+       left: 1rem;
+       width: auto;
+     }
+     
+     .map-legend {
+       bottom: auto;
+       top: 4rem;
+       max-width: 200px;
+     }
+     
+     .map-infobox {
+       right: 0.5rem;
+       left: 0.5rem;
+       width: auto;
+       bottom: 0.5rem;
+     }
+   }
+   
+   @media (max-width: 576px) {
+     .map-container {
+       height: 350px;
+     }
+     
+     .map-header {
+       flex-direction: column;
+       align-items: flex-start;
+       gap: 0.75rem;
+     }
+     
+     .map-actions {
+       width: 100%;
+       justify-content: space-between;
+     }
+     
+     .map-legend {
+       display: none;
+     }
+   }

@@ -14,6 +14,14 @@ function Login() {
     e.preventDefault();
 
     try {
+      // Clear any previous session before login
+      localStorage.removeItem('token');
+      localStorage.removeItem('usuario');
+      localStorage.removeItem('nome');
+      localStorage.removeItem('email');
+      localStorage.removeItem('perfil');
+      localStorage.removeItem('user');
+
       const formData = new URLSearchParams();
       formData.append('username', email);
       formData.append('password', password);
@@ -41,10 +49,12 @@ function Login() {
         const { nome, email, perfil } = payload;
 
         // Salvar no localStorage
+        localStorage.setItem('token', data.access_token);
         localStorage.setItem('nome', nome || 'Usuário');
         localStorage.setItem('email', email || '');
         localStorage.setItem('perfil', perfil || 'Indefinido');
         localStorage.setItem('usuario', JSON.stringify(payload));
+        localStorage.setItem('user', JSON.stringify({ nome, email, perfil }));
       }
 
       navigate('/dashboard');

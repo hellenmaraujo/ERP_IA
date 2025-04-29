@@ -1,18 +1,23 @@
-import Sidebar from '../../components/common/Sidebar';
-import Header from '../../components/common/Header';
+import DashboardOperacional from './dashboard_operacional';
+import DashboardMotorista from './dashboard_motorista';
 import '../../assets/styles/pages/_dashboard.css';
+import PageLayout from '../../components/layout/PageLayout';
 
 function Dashboard() {
+  const perfil = localStorage.getItem('perfil');
+
+  const renderDashboard = () => {
+    if (perfil === 'motorista') {
+      return <DashboardMotorista />;
+    } else {
+      return <DashboardOperacional />;
+    }
+  };
+
   return (
-    <div className="dashboard-layout">
-      <Sidebar />
-      <div className="dashboard-main">
-        <Header />
-        <div className="dashboard-content">
-          <h1>Conteúdo do Dashboard</h1>
-        </div>
-      </div>
-    </div>
+    <PageLayout pageTitle="Dashboard">
+      {renderDashboard()}
+    </PageLayout>
   );
 }
 

@@ -1,12 +1,26 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth.jsx';
 import '../../assets/styles/layout/_header.css';
 
-const nome = localStorage.getItem('nome');
-const perfil = localStorage.getItem('perfil');
 
 function Header() {
+  const [nome, setNome] = useState('Usuário');
+  const [perfil, setPerfil] = useState('Perfil');
+
+  useEffect(() => {
+    const storedUser = localStorage.getItem('user');
+    if (storedUser) {
+      try {
+        const parsed = JSON.parse(storedUser);
+        setNome(parsed.nome || 'Usuário');
+        setPerfil(parsed.perfil || 'Perfil');
+      } catch (err) {
+        console.error('Erro ao ler usuário:', err);
+      }
+    }
+  }, []);
+
   const { user } = useAuth();
   const location = useLocation();
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
