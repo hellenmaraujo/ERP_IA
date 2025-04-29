@@ -34,3 +34,9 @@ def complete_maintenance(
     if not maintenance:
         raise HTTPException(status_code=404, detail="Manutenção não encontrada")
     return maintenance
+
+@router.get("/alertas")
+def listar_alertas(db: Session = Depends(get_db), user: User = Depends(current_user)):
+    if user.perfil != PerfilEnum.administrativo:
+        raise HTTPException(status_code=403, detail="Acesso negado")
+    return verificar_alertas_manutencao(db)

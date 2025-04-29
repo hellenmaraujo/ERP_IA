@@ -16,3 +16,5 @@ class Vehicle(Base):
     capacidade_kg = Column(Float, nullable=False)
     disponivel = Column(Boolean, default=True)
     maintenance = relationship("VehicleMaintenance", back_populates="vehicle")  
+    km_atual = Column(Float, nullable=True)
+    km_proxima_manutencao = Column(Float, nullable=True)
