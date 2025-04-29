@@ -3,9 +3,14 @@ from erp_log.modules.deliveries.deliveries_models import Delivery
 from erp_log.modules.deliveries.deliveries_schemas import DeliveryCreate
 from fastapi import HTTPException
 from datetime import datetime
+from erp_log.modules.routing.routing_geolocation import get_coordinates
 
 def create_delivery(db: Session, delivery: DeliveryCreate):
     db_delivery = Delivery(**delivery.dict())
+    coords = get_coordinates(delivery.cep)
+    if coords:
+        db_delivery.x = coords[0]
+        db_delivery.y = coords[1]
     db.add(db_delivery)
     db.commit()
     db.refresh(db_delivery)

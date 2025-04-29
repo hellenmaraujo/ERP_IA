@@ -4,13 +4,9 @@ from erp_log.core.config import get_settings
 
 settings = get_settings()
 
-def get_coordinates(address: str, city: str, state: str) -> Optional[Tuple[float, float]]:
-    # Limpar entradas
-    address = address.strip()
-    city = city.strip().split("FONE")[0].strip()  # Remove se tiver lixo "FONE"
-    state = state.strip()
-
-    query = f"{address}, {city} - {state}, Brasil"
+def get_coordinates(cep: str) -> Optional[Tuple[float, float]]:
+    cep = cep.strip()
+    query = f"{cep.replace('-', '')}, Brasil"
 
     url = "https://maps.googleapis.com/maps/api/geocode/json"
     params = {
@@ -24,4 +20,5 @@ def get_coordinates(address: str, city: str, state: str) -> Optional[Tuple[float
         if data.get("results"):
             location = data["results"][0]["geometry"]["location"]
             return location["lat"], location["lng"]
+    print("Google Geocoding API response:", data)
     return None
