@@ -1,5 +1,6 @@
 from sqlalchemy import Column, Integer, String, Float, Boolean
 from erp_log.core.database import Base
+from sqlalchemy.orm import relationship
 
 class Vehicle(Base):
     __tablename__ = "vehicles"
@@ -14,3 +15,4 @@ class Vehicle(Base):
     tipo = Column(String, nullable=False)
     capacidade_kg = Column(Float, nullable=False)
     disponivel = Column(Boolean, default=True)
+    maintenance = relationship("VehicleMaintenance", back_populates="vehicle")  
