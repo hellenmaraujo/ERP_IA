@@ -41,6 +41,12 @@ function Sidebar() {
           </li>
           <li>
             <Link to="/deliveries">
+              <i className="menu-icon">📦</i>
+              <span>Lista de Entregas</span>
+            </Link>
+          </li>
+          <li>
+            <Link to="/deliveries">
               <i className="menu-icon">🚚</i>
               <span>Entregas</span>
             </Link>
