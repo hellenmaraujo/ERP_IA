@@ -70,3 +70,23 @@ def get_delivery_history(db: Session, delivery_id: int):
         "entregue_em": proof.uploaded_at if proof else None,
         "arquivo_comprovante": proof.file_path if proof else None
     }
+
+def assign_driver_to_delivery(db: Session, delivery_id: int, driver_id: int):
+    delivery = db.query(Delivery).filter(Delivery.id == delivery_id).first()
+    if not delivery:
+        return None
+    
+    # Verificar se motorista existe
+    driver = db.query(Driver).filter(Driver.id == driver_id).first()
+    if not driver:
+        return None
+    
+    delivery.motorista_id = driver_id
+    
+    # Se a entrega estava pendente, atualizá-la para em rota
+    if delivery.status == "pendente":
+        delivery.status = "em_rota"
+    
+    db.commit()
+    db.refresh(delivery)
+    return delivery
