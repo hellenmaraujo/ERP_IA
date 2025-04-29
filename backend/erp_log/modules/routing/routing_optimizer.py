@@ -1,4 +1,4 @@
-from typing import List, Tuple
+from typing import List, Tuple, Optional
 from erp_log.modules.routing.routing_schemas import Entrega, Veiculo
 import math
 from itertools import combinations
@@ -9,19 +9,19 @@ from sqlalchemy.orm import Session
 def distancia(p1, p2):
     return math.hypot(p1.x - p2.x, p1.y - p2.y)
 
-def gerar_matriz(entregas: List[Entrega]):
+def gerar_matriz(entregas: List[Entrega], departure_time: Optional[int] = None):
     coords = {("Matrix SPMax" if e.id == "CD" else e.id): {"lat": e.x if e.id != "CD" else -23.416184, "lng": e.y if e.id != "CD" else -46.444607} for e in entregas}
-    return gerar_matriz_google(coords)
+    return gerar_matriz_google(coords, departure_time=departure_time)
 
 def peso_rota(rota, entregas_dict):
     return sum(entregas_dict[p].peso for p in rota if p in entregas_dict)
 
-def clarke_wright_2opt(entregas: List[Entrega], veiculos: List[Veiculo], db: Session):
+def clarke_wright_2opt(entregas: List[Entrega], veiculos: List[Veiculo], db: Session, departure_time: Optional[int] = None):
     entregas_dict = {("Matrix SPMax" if e.id == "CD" else e.id): e for e in entregas if e.id != "CD"}
     cd = next((e for e in entregas if e.id == "Matrix SPMax"), None)
     if not cd:
         raise ValueError("Ponto de origem 'Matrix SPMax' não encontrado nas entregas.")
-    distancias, tempos, custos = gerar_matriz(entregas)
+    distancias, tempos, custos = gerar_matriz(entregas, departure_time)
 
     rotas = {p: ["Matrix SPMax", p, "Matrix SPMax"] for p in entregas_dict}
     savings = []

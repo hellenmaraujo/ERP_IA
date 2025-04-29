@@ -2,6 +2,7 @@ from sqlalchemy import Column, String, Float, DateTime, ForeignKey, Integer
 from sqlalchemy.dialects.postgresql import UUID
 import uuid
 from datetime import datetime
+from typing import Optional
 from erp_log.core.database import Base
 from sqlalchemy.orm import Session
 
@@ -24,14 +25,15 @@ class RotaEntrega(Base):
     entrega_id = Column(String, nullable=False)
     ordem = Column(Integer, nullable=False)
 
-def salvar_rotas(rotas: list, db: Session):
+def salvar_rotas(rotas: list, db: Session, departure_time: Optional[datetime] = None):
     for rota in rotas:
         nova_rota = Rota(
             veiculo=rota["veiculo"],
             carga_total=rota["carga_total"],
             distancia_total=rota["distancia_total"],
             tempo_total=rota["tempo_total"],
-            custo_total=rota["custo_total"]
+            custo_total=rota["custo_total"],
+            data_criacao=departure_time or datetime.utcnow()
         )
         db.add(nova_rota)
         db.flush()  # necessário para obter o ID da rota salva

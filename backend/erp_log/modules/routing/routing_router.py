@@ -15,3 +15,14 @@ def gerar_rotas(
 ):
     resultado = clarke_wright_2opt(request.entregas, request.veiculos, db)
     return {"rotas": resultado}
+
+from erp_log.modules.routing.routing_schemas import RotaResumoOut
+from erp_log.modules.routing import routing_service
+from typing import List
+
+@router.get("/routes", response_model=List[RotaResumoOut])
+def list_routes(
+    db: Session = Depends(get_db),
+    current_user: dict = Depends(check_permission(["operacional", "administrativo"]))
+):
+    return routing_service.get_all_routes(db)
