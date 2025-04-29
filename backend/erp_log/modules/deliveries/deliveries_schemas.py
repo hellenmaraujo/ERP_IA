@@ -12,6 +12,7 @@ class StatusEntregaEnum(str, Enum):
     pendente = "pendente"
     entregue = "entregue"
     atrasado = "atrasado"
+    em_rota = "em_rota"
 
 class DeliveryCreate(BaseModel):
     numero_nota: Optional[str] = None
@@ -62,6 +63,7 @@ class DeliveryCreate(BaseModel):
     prazo_entrega: Optional[datetime] = None
     latitude: Optional[float] = None
     longitude: Optional[float] = None
+    status: Optional[StatusEntregaEnum] = StatusEntregaEnum.pendente
 
 class DeliveryOut(DeliveryCreate):
     id: int
@@ -70,3 +72,16 @@ class DeliveryOut(DeliveryCreate):
 
     class Config:
         from_attributes = True
+
+
+# Novo schema para histórico de entregas
+from typing import Optional
+
+class DeliveryHistoryOut(BaseModel):
+    entrega_id: int
+    status: StatusEntregaEnum
+    criada_em: datetime
+    prazo_entrega: Optional[datetime]
+    atribuida_para: Optional[dict]
+    entregue_em: Optional[datetime]
+    arquivo_comprovante: Optional[str]

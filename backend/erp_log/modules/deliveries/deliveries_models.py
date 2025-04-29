@@ -12,6 +12,7 @@ class StatusEntregaEnum(str, enum.Enum):
     pendente = "pendente"
     entregue = "entregue"
     atrasado = "atrasado"
+    em_rota = "em_rota"
 
 class Delivery(Base):
     __tablename__ = "deliveries"
