@@ -1,4 +1,4 @@
-from erp_log.modules.users.users_router import check_permission
+from erp_log.core.permissions import check_permission
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 from typing import List
@@ -21,6 +21,8 @@ def list_fuels(
     db: Session = Depends(get_db),
     current_user: dict = Depends(check_permission(["motorista", "operacional", "administrativo"]))
 ):
+    if current_user["perfil"] == "motorista":
+        return fuel_service.get_fuels_by_user(db, user_id=current_user["id"])
     return fuel_service.get_fuels(db)
 
 @router.get("/{fuel_id}", response_model=FuelOut)

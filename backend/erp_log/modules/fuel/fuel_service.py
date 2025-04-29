@@ -21,3 +21,6 @@ def delete_fuel(db: Session, fuel_id: int):
         db.delete(db_fuel)
         db.commit()
     return db_fuel
+
+def get_fuels_by_user(db: Session, user_id: int):
+    return db.query(Fuel).filter(Fuel.usuario_id == user_id).all()
