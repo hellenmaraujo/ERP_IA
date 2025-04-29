@@ -49,7 +49,7 @@ from pydantic import BaseModel
 SECRET_KEY = "seusegredoaqui"  # troque para sua chave real
 ALGORITHM = "HS256"
 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="login")
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/login")
 
 class UserOut(BaseModel):
     nome: str

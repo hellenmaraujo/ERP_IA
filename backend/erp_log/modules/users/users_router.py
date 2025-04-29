@@ -12,7 +12,7 @@ from typing import Dict
 router = APIRouter(prefix="/auth", tags=["Autenticação"])
 settings = get_settings()
 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/login")
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/login")
 
 def get_db():
     db = SessionLocal()
