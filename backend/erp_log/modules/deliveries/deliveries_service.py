@@ -90,3 +90,18 @@ def assign_driver_to_delivery(db: Session, delivery_id: int, driver_id: int):
     db.commit()
     db.refresh(delivery)
     return delivery
+
+def update_delivery_status(db: Session, delivery_id: int, new_status: StatusEntregaEnum):
+    delivery = db.query(Delivery).filter(Delivery.id == delivery_id).first()
+    if not delivery:
+        return None
+    
+    delivery.status = new_status
+    
+    # Se o status for "entregue", registrar a data de entrega
+    if new_status == StatusEntregaEnum.entregue:
+        delivery.data_entrega = datetime.utcnow()
+    
+    db.commit()
+    db.refresh(delivery)
+    return delivery

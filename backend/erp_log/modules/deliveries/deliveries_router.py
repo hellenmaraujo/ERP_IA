@@ -79,3 +79,26 @@ def assign_driver(
     if not delivery:
         raise HTTPException(status_code=404, detail="Entrega ou motorista não encontrado")
     return delivery
+
+@router.put("/{delivery_id}/status", response_model=DeliveryOut)
+def update_status(
+    delivery_id: int,
+    status: StatusEntregaEnum,
+    db: Session = Depends(get_db),
+    current_user: dict = Depends(check_permission(["motorista", "operacional", "administrativo"]))
+):
+    # Motoristas só podem atualizar entregas atribuídas a eles
+    if current_user["perfil"] == "motorista":
+        driver = db.query(Driver).filter(Driver.usuario_id == current_user["id"]).first()
+        if not driver:
+            raise HTTPException(status_code=403, detail="Motorista não encontrado")
+        
+        delivery = db.query(Delivery).filter(
+            Delivery.id == delivery_id,
+            Delivery.motorista_id == driver.id
+        ).first()
+        
+        if not delivery:
+            raise HTTPException(status_code=403, detail="Entrega não pertence a este motorista")
+    
+    return deliveries_service.update_delivery_status(db, delivery_id, status)

@@ -10,9 +10,11 @@ class TipoEntregaEnum(str, enum.Enum):
 
 class StatusEntregaEnum(str, enum.Enum):
     pendente = "pendente"
+    em_rota = "em_rota"
     entregue = "entregue"
     atrasado = "atrasado"
-    em_rota = "em_rota"
+    problema = "problema"
+    devolvido = "devolvido"
 
 class Delivery(Base):
     __tablename__ = "deliveries"
