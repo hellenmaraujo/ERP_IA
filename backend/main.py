@@ -13,6 +13,7 @@ from erp_log.modules.drivers.driver_router import router as driver_router
 from erp_log.modules.route.routes_router import router as route_router
 from erp_log.modules.proof.proof_router import router as proof_router
 from erp_log.modules.kpis.kpi_router import router as kpi_router
+from erp_log.modules.reports.reports_router import router as reports_router
 
 app = FastAPI()
 
@@ -41,6 +42,7 @@ app.include_router(driver_router, prefix="/drivers", tags=["Motoristas"])
 app.include_router(route_router, prefix="/routes", tags=["Rotas"])
 app.include_router(proof_router, prefix="/proof", tags=["Comprovantes"])
 app.include_router(kpi_router)
+app.include_router(reports_router)
 
 @app.get("/")
 def root():
