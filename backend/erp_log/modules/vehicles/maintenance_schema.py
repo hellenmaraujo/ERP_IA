@@ -4,7 +4,7 @@ from datetime import date
 
 class MaintenanceBase(BaseModel):
     vehicle_id: int
-    maintenance_type: str = Field(..., regex=r'^(preventiva|corretiva|revisao)$')
+    maintenance_type: str = Field(..., pattern=r'^(preventiva|corretiva|revisao)$')
     description: str = Field(..., min_length=5)
     date: date
     cost: float = Field(..., ge=0)

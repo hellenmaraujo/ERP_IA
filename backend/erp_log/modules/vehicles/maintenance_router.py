@@ -36,7 +36,7 @@ def complete_maintenance(
     return maintenance
 
 @router.get("/alertas")
-def listar_alertas(db: Session = Depends(get_db), user: User = Depends(current_user)):
-    if user.perfil != PerfilEnum.administrativo:
+def listar_alertas(db: Session = Depends(get_db), user: dict = Depends(check_permission(["administrativo"]))):
+    if user.get("perfil") != "administrativo":
         raise HTTPException(status_code=403, detail="Acesso negado")
     return verificar_alertas_manutencao(db)

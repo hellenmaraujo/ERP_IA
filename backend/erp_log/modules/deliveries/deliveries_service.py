@@ -4,6 +4,7 @@ from erp_log.modules.deliveries.deliveries_schemas import DeliveryCreate
 from fastapi import HTTPException
 from datetime import datetime
 from erp_log.modules.routing.routing_geolocation import get_coordinates
+from erp_log.modules.deliveries.deliveries_schemas import StatusEntregaEnum
 
 def create_delivery(db: Session, delivery: DeliveryCreate):
     db_delivery = Delivery(**delivery.dict())
