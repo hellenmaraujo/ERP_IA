@@ -14,10 +14,13 @@ def get_delivery_report(
     end_date: Optional[date] = None,
     motorista_id: Optional[int] = None,
     regiao: Optional[str] = None,
+    tipo_entrega: Optional[str] = None,
     db: Session = Depends(get_db),
     current_user: dict = Depends(check_permission(["administrativo"]))
 ):
-    return reports_service.generate_delivery_report(db, start_date, end_date, motorista_id, regiao)
+    return reports_service.generate_delivery_report(
+        db, start_date, end_date, motorista_id, regiao, tipo_entrega
+    )
 
 @router.get("/veiculos")
 def get_vehicle_report(

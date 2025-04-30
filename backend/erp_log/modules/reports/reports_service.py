@@ -4,7 +4,7 @@ from erp_log.modules.drivers.driver_models import Driver
 from erp_log.modules.vehicles.vehicle_models import Vehicle
 from datetime import datetime, timedelta
 
-def generate_delivery_report(db: Session, start_date=None, end_date=None, motorista_id=None, regiao=None):
+def generate_delivery_report(db: Session, start_date=None, end_date=None, motorista_id=None, regiao=None, tipo_entrega=None):
     """Gera relatório de entregas com filtros"""
     query = db.query(Delivery)
     
@@ -19,6 +19,9 @@ def generate_delivery_report(db: Session, start_date=None, end_date=None, motori
     
     if regiao:
         query = query.filter(Delivery.cidade == regiao)
+
+    if tipo_entrega:
+        query = query.filter(Delivery.tipo_entrega == tipo_entrega)
     
     entregas = query.all()
     
@@ -38,6 +41,7 @@ def generate_delivery_report(db: Session, start_date=None, end_date=None, motori
             "endereco": entrega.endereco,
             "cidade": entrega.cidade,
             "estado": entrega.estado,
+            "tipo_entrega": entrega.tipo_entrega,
             "status": entrega.status,
             "data_criacao": entrega.criado_em.isoformat() if entrega.criado_em else None,
             "motorista": motorista
