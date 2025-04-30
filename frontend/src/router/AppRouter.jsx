@@ -10,6 +10,7 @@ import Usuarios from '../pages/Usuarios/Usuarios';
 import Abastecimento from '../pages/Abastecimento/Abastecimento';
 import Motoristas from '../pages/Motoristas/Motoristas';
 import Veiculos from '../pages/Veiculos/Veiculos';
+import VeiculoDetalhado from '../pages/Veiculos/VeiculoDetalhe';
 
 function AppRouter() {
   return (
@@ -22,6 +23,7 @@ function AppRouter() {
       <Route path="/indicadores" element={<Indicadores />} />
       <Route path="/relatorios" element={<Relatorios />} />
       <Route path="/veiculos" element={<Veiculos />} />
+      <Route path="/veiculos/:id" element={<VeiculoDetalhado />} />
       <Route path="/usuarios" element={<Usuarios />} />
       <Route path="/abastecimento" element={<Abastecimento />} />
       <Route path="/motoristas" element={<Motoristas />} />

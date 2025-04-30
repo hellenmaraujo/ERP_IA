@@ -110,12 +110,6 @@ function Sidebar() {
                   <span>Usuários</span>
                 </Link>
               </li>
-              <li>
-                <Link to="/settings">
-                  <i className="menu-icon">⚙️</i>
-                  <span>Configurações</span>
-                </Link>
-              </li>
             </ul>
           </>
         )}

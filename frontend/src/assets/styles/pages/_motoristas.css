@@ -1,0 +1,140 @@
+.motoristas-container {
+     padding: 24px;
+     max-width: 1200px;
+     margin: 0 auto;
+   }
+   
+   .header-motoristas {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     margin-bottom: 24px;
+   }
+   
+   .botao-novo-motorista {
+     background-color: #2563eb;
+     color: white;
+     padding: 8px 16px;
+     border-radius: 8px;
+     font-weight: 500;
+     font-size: 14px;
+     border: none;
+     cursor: pointer;
+   }
+   
+   .botao-novo-motorista:hover {
+     background-color: #1e40af;
+   }
+   
+   .busca-motorista {
+     display: flex;
+     justify-content: flex-end;
+     align-items: center;
+     margin-bottom: 24px;
+     gap: 12px;
+   }
+   
+   .busca-motorista input {
+     padding: 10px;
+     border: 1px solid #d1d5db;
+     border-radius: 6px;
+     width: 260px;
+     font-size: 14px;
+   }
+   
+   .grid-motoristas {
+     display: grid;
+     grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+     gap: 24px;
+   }
+   
+   .card-motorista {
+     background: white;
+     border-radius: 12px;
+     box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+     padding: 24px;
+   }
+   
+   .card-motorista img {
+     width: 64px;
+     height: 64px;
+     border-radius: 50%;
+     object-fit: cover;
+   }
+   
+   .titulo-motorista {
+     font-size: 18px;
+     font-weight: 600;
+     color: #1f2937;
+   }
+   
+   .status-tag {
+     padding: 4px 12px;
+     border-radius: 9999px;
+     font-size: 12px;
+     font-weight: 500;
+   }
+   
+   .status-em-rota {
+     background-color: #dcfce7;
+     color: #166534;
+   }
+   
+   .status-disponivel {
+     background-color: #dbeafe;
+     color: #1e3a8a;
+   }
+   
+   .info-contato {
+     color: #4b5563;
+     font-size: 14px;
+   }
+   
+   .alerta-motorista {
+     background-color: #fef2f2;
+     color: #991b1b;
+     padding: 12px;
+     border-radius: 6px;
+     margin-top: 12px;
+     font-size: 14px;
+   }
+   
+   .metricas-box {
+     background-color: #f9fafb;
+     padding: 12px;
+     border-radius: 8px;
+     text-align: center;
+   }
+   
+   .metricas-box p {
+     font-size: 14px;
+     color: #6b7280;
+     margin: 0;
+   }
+   
+   .metricas-box strong {
+     font-size: 20px;
+     color: #111827;
+     display: block;
+     margin-top: 4px;
+   }
+   
+   .acoes-motorista {
+     display: flex;
+     gap: 12px;
+     margin-top: 16px;
+   }
+   
+   .acoes-motorista button {
+     flex: 1;
+     padding: 10px;
+     border-radius: 8px;
+     border: 1px solid #d1d5db;
+     background-color: #f9fafb;
+     font-size: 14px;
+     cursor: pointer;
+   }
+   
+   .acoes-motorista button:hover {
+     background-color: #f3f4f6;
+   }
