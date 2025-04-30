@@ -1,5 +1,3 @@
-
-
 # 🛠️ ERP_Log — Backend
 
 Este é o backend do ERP_Log, uma solução logística com múltiplos perfis de acesso, roteirização inteligente, upload de entregas e dashboards com KPIs.
@@ -27,13 +25,13 @@ erp_log/
 
 ## ✅ Funcionalidades
 
-- Autenticação por perfil (JWT)
-- Upload e preview de entregas (PDF)
-- Cálculo de KPIs automáticos
-- Roteirização inteligente com Google Maps API
-- Visualização em mapa
-- Dashboards em tempo real
-- Exportação de relatórios
+- Autenticação com JWT e controle por perfil (motorista, operacional, administrativo)
+- Upload de entregas (PDF) com leitura automática de dados
+- Algoritmo de roteirização híbrido (Clarke-Wright + 2-Opt) com Google Maps
+- Cálculo de KPIs: tempo médio, entregas por tipo, por motorista, por região
+- Relatórios com filtros avançados (data, tipo, região, motorista)
+- Exportação de relatórios em .xlsx diretamente pela API
+- Visualização em mapa preparada para integração no frontend
 
 ---
 

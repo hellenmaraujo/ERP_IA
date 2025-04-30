@@ -87,14 +87,14 @@ npm run dev
 
 ## Progresso Atual
 
-- Backend com autenticação e upload de entregas funcionando.
+- Backend completo com autenticação, roteirização, KPIs e relatórios.
 - Frontend com tela de login integrada ao backend.
-- Redirecionamento correto após login.
-- Estrutura de dashboard será iniciada.
+- Exportação de relatórios em Excel funcional.
+- Dashboard com KPIs operacionais e logísticos disponível via API.
+- Visualização em mapa a ser implementada no frontend.
 
 ## Próximos Passos
 
-- Desenvolver tela de dashboard no frontend.
-- Implementar proteção de rotas autenticadas.
-- Criar exibição de entregas e KPIs no dashboard.
-- Melhorar sistema de alertas e feedbacks de erro.
+- Implementar dashboard interativo com visualização em mapa no frontend.
+- Integrar KPIs e dados georreferenciados ao frontend.
+- Refinar experiência de usuário e feedbacks visuais.

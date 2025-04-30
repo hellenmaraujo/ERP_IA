@@ -90,20 +90,18 @@ ERP_Log/
   - Prioridades
   - Capacidade dos veículos
 - Uso da **Google Distance Matrix API** para dados em tempo real de distância e tráfego.
+- Algoritmo de roteirização finalizado no backend e disponível via API
+- Integração com frontend em andamento
 
 ---
 
 ## 📊 Dashboards e KPIs
 
-- Monitoramento e exibição de:
-  - Número de entregas por hora e por dia
-  - Tempo médio de entrega
-  - Taxa de sucesso de entregas
-  - Percentual e quantidade de atrasos
-- Visualização através de:
-  - Gráficos interativos
-  - Cards dinâmicos
-  - Mapas geolocalizados
+- Backend entrega os seguintes indicadores via API:
+  - Tempo médio por entrega
+  - Entregas por tipo, motorista e região
+  - Taxa de sucesso e atraso
+- Visualização em frontend será feita por gráficos, cards e mapas geográficos
 
 ---
 
