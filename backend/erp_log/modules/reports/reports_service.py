@@ -3,6 +3,9 @@ from erp_log.modules.deliveries.deliveries_models import Delivery
 from erp_log.modules.drivers.driver_models import Driver
 from erp_log.modules.vehicles.vehicle_models import Vehicle
 from datetime import datetime, timedelta
+import pandas as pd
+from fastapi.responses import StreamingResponse
+import io
 
 def generate_delivery_report(db: Session, start_date=None, end_date=None, motorista_id=None, regiao=None, tipo_entrega=None):
     """Gera relatório de entregas com filtros"""
@@ -101,3 +104,16 @@ def generate_driver_report(db: Session, ativo=None):
         })
     
     return result
+
+def exportar_entregas_excel(db, start_date=None, end_date=None, motorista_id=None, regiao=None, tipo_entrega=None):
+    dados = generate_delivery_report(db, start_date, end_date, motorista_id, regiao, tipo_entrega)
+
+    df = pd.DataFrame(dados)
+    stream = io.BytesIO()
+    with pd.ExcelWriter(stream, engine="xlsxwriter") as writer:
+        df.to_excel(writer, index=False, sheet_name="Relatório")
+
+    stream.seek(0)
+    return StreamingResponse(stream, media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", headers={
+        "Content-Disposition": "attachment; filename=relatorio_entregas.xlsx"
+    })

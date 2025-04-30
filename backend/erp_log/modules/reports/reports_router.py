@@ -37,3 +37,17 @@ def get_driver_report(
     current_user: dict = Depends(check_permission(["administrativo"]))
 ):
     return reports_service.generate_driver_report(db, ativo)
+
+@router.get("/export")
+def exportar_relatorio_entregas(
+    start_date: Optional[date] = None,
+    end_date: Optional[date] = None,
+    motorista_id: Optional[int] = None,
+    regiao: Optional[str] = None,
+    tipo_entrega: Optional[str] = None,
+    db: Session = Depends(get_db),
+    current_user: dict = Depends(check_permission(["administrativo"]))
+):
+    return reports_service.exportar_entregas_excel(
+        db, start_date, end_date, motorista_id, regiao, tipo_entrega
+    )
