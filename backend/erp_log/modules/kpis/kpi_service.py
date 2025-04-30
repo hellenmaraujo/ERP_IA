@@ -117,3 +117,47 @@ def get_performance_regioes(db: Session, period_days=30):
         })
     
     return resultados
+
+
+# Funções adicionais de KPI
+def get_tempo_medio_entrega(db: Session, period_days=30):
+    """Calcula o tempo médio de entrega em minutos"""
+    date_limit = datetime.utcnow() - timedelta(days=period_days)
+
+    resultado = db.query(
+        func.avg(func.extract('epoch', Delivery.data_entrega - Delivery.data_inicio))
+    ).filter(
+        Delivery.criado_em >= date_limit,
+        Delivery.data_inicio != None,
+        Delivery.data_entrega != None
+    ).scalar()
+
+    return round(resultado / 60, 2) if resultado else 0
+
+
+def get_entregas_por_tipo(db: Session, period_days=30):
+    """Retorna contagem de entregas agrupadas por tipo"""
+    date_limit = datetime.utcnow() - timedelta(days=period_days)
+
+    resultados = db.query(
+        Delivery.tipo_entrega,
+        func.count(Delivery.id)
+    ).filter(
+        Delivery.criado_em >= date_limit
+    ).group_by(Delivery.tipo_entrega).all()
+
+    return [{"tipo": tipo, "total": total} for tipo, total in resultados]
+
+
+def get_entregas_por_motorista(db: Session, period_days=30):
+    """Retorna total de entregas por motorista"""
+    date_limit = datetime.utcnow() - timedelta(days=period_days)
+
+    resultados = db.query(
+        Delivery.motorista_id,
+        func.count(Delivery.id)
+    ).filter(
+        Delivery.criado_em >= date_limit
+    ).group_by(Delivery.motorista_id).all()
+
+    return [{"motorista_id": m_id, "total": total} for m_id, total in resultados]

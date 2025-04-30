@@ -29,3 +29,15 @@ def get_performance_regioes(
     current_user: dict = Depends(check_permission(["administrativo"]))
 ):
     return kpi_service.get_performance_regioes(db, period_days)
+
+@router.get("/dashboard")
+def get_kpis_dashboard(
+    period_days: int = 30,
+    db: Session = Depends(get_db),
+    current_user: dict = Depends(check_permission(["administrativo"]))
+):
+    return {
+        "tempo_medio_entrega_min": kpi_service.get_tempo_medio_entrega(db, period_days),
+        "entregas_por_tipo": kpi_service.get_entregas_por_tipo(db, period_days),
+        "entregas_por_motorista": kpi_service.get_entregas_por_motorista(db, period_days),
+    }
