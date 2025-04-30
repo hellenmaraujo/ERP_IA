@@ -1,11 +1,11 @@
 import PageLayout from '../../components/layout/PageLayout';
 
-function Usuarios() {
+function Indicadores() {
   return (
-    <PageLayout pageTitle="Usuarios">
+    <PageLayout pageTitle="Indicadores">
       <p>Teste de renderização</p>
     </PageLayout>
   );
 }
 
-export default Usuarios;
+export default Indicadores;

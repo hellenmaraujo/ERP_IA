@@ -6,6 +6,7 @@ import Logo from '../../assets/images/logo.png';
 function Sidebar() {
   // Estado para controlar se o sidebar está colapsado ou não
   const [collapsed, setCollapsed] = useState(localStorage.getItem('sidebarState') === 'collapsed');
+  const perfil = localStorage.getItem('perfil'); // 'administrativo', 'operacional', 'motorista'
 
   const navigate = useNavigate();
 
@@ -36,13 +37,7 @@ function Sidebar() {
           <li>
             <Link to="/dashboard">
               <i className="menu-icon">🏠</i>
-              <span>Dashboard</span>
-            </Link>
-          </li>
-          <li>
-            <Link to="/deliveries">
-              <i className="menu-icon">📦</i>
-              <span>Lista de Entregas</span>
+              <span>Principal</span>
             </Link>
           </li>
           <li>
@@ -52,48 +47,78 @@ function Sidebar() {
             </Link>
           </li>
           <li>
-            <Link to="/upload">
-              <i className="menu-icon">🗂️</i>
-              <span>Upload</span>
+            <Link to="/abastecimento">
+              <i className="menu-icon">⛽</i>
+              <span>Abastecimento</span>
             </Link>
           </li>
+          {perfil !== 'motorista' && (
+            <li>
+              <Link to="/upload">
+                <i className="menu-icon">🗂️</i>
+                <span>Processar NFs</span>
+              </Link>
+            </li>
+          )}
+          {perfil !== 'motorista' && (
+            <li>
+              <Link to="/roteirizacao">
+                <i className="menu-icon">🧭</i>
+                <span>Roteirização</span>
+              </Link>
+            </li>
+          )}
         </ul>
         
-        <div className="sidebar-separator"></div>
-        
-        <p className="sidebar-section">Gestão</p>
-        <ul>
-          <li>
-            <Link to="/drivers">
-              <i className="menu-icon">👨‍✈️</i>
-              <span>Motoristas</span>
-            </Link>
-          </li>
-          <li>
-            <Link to="/vehicles">
-              <i className="menu-icon">🚛</i>
-              <span>Veículos</span>
-            </Link>
-          </li>
-        </ul>
-        
-        <div className="sidebar-separator"></div>
-        
-        <p className="sidebar-section">Sistema</p>
-        <ul>
-          <li>
-            <Link to="/users">
-              <i className="menu-icon">👥</i>
-              <span>Usuários</span>
-            </Link>
-          </li>
-          <li>
-            <Link to="/settings">
-              <i className="menu-icon">⚙️</i>
-              <span>Configurações</span>
-            </Link>
-          </li>
-        </ul>
+        {perfil === 'administrativo' && (
+          <>
+            <div className="sidebar-separator"></div>
+            <p className="sidebar-section">Gestão</p>
+            <ul>
+              <li>
+                <Link to="/dashboard/admin">
+                  <i className="menu-icon">📈</i>
+                  <span>Indicadores</span>
+                </Link>
+              </li>
+              <li>
+                <Link to="/relatorios">
+                  <i className="menu-icon">📄</i>
+                  <span>Relatórios</span>
+                </Link>
+              </li>
+              <li>
+                <Link to="/drivers">
+                  <i className="menu-icon">👨‍✈️</i>
+                  <span>Motoristas</span>
+                </Link>
+              </li>
+              <li>
+                <Link to="/vehicles">
+                  <i className="menu-icon">🚛</i>
+                  <span>Veículos</span>
+                </Link>
+              </li>
+            </ul>
+
+            <div className="sidebar-separator"></div>
+            <p className="sidebar-section">Sistema</p>
+            <ul>
+              <li>
+                <Link to="/users">
+                  <i className="menu-icon">👥</i>
+                  <span>Usuários</span>
+                </Link>
+              </li>
+              <li>
+                <Link to="/settings">
+                  <i className="menu-icon">⚙️</i>
+                  <span>Configurações</span>
+                </Link>
+              </li>
+            </ul>
+          </>
+        )}
       </nav>
       
       <div className="sidebar-logout">
