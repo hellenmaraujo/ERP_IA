@@ -76,7 +76,7 @@ function Sidebar() {
             <p className="sidebar-section">Gestão</p>
             <ul>
               <li>
-                <Link to="/dashboard/admin">
+                <Link to="/indicadores">
                   <i className="menu-icon">📈</i>
                   <span>Indicadores</span>
                 </Link>
@@ -88,13 +88,13 @@ function Sidebar() {
                 </Link>
               </li>
               <li>
-                <Link to="/drivers">
+                <Link to="/motoristas">
                   <i className="menu-icon">👨‍✈️</i>
                   <span>Motoristas</span>
                 </Link>
               </li>
               <li>
-                <Link to="/vehicles">
+                <Link to="/veiculos">
                   <i className="menu-icon">🚛</i>
                   <span>Veículos</span>
                 </Link>
@@ -105,7 +105,7 @@ function Sidebar() {
             <p className="sidebar-section">Sistema</p>
             <ul>
               <li>
-                <Link to="/users">
+                <Link to="/usuarios">
                   <i className="menu-icon">👥</i>
                   <span>Usuários</span>
                 </Link>
