@@ -10,8 +10,8 @@ def create_delivery(db: Session, delivery: DeliveryCreate):
     db_delivery = Delivery(**delivery.dict())
     coords = get_coordinates(delivery.cep)
     if coords:
-        db_delivery.x = coords[0]
-        db_delivery.y = coords[1]
+        db_delivery.x = coords["lat"]
+        db_delivery.y = coords["lng"]
     db.add(db_delivery)
     db.commit()
     db.refresh(db_delivery)

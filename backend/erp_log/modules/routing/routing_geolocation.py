@@ -1,10 +1,10 @@
 import requests
-from typing import Optional, Tuple
+from typing import Optional, Dict
 from erp_log.core.config import get_settings
 
 settings = get_settings()
 
-def get_coordinates(cep: str) -> Optional[Tuple[float, float]]:
+def get_coordinates(cep: str) -> Optional[Dict[str, float]]:
     cep = cep.strip()
     query = f"{cep.replace('-', '')}, Brasil"
 
@@ -19,6 +19,6 @@ def get_coordinates(cep: str) -> Optional[Tuple[float, float]]:
         data = response.json()
         if data.get("results"):
             location = data["results"][0]["geometry"]["location"]
-            return location["lat"], location["lng"]
+            return {"lat": location["lat"], "lng": location["lng"]}
     print("Google Geocoding API response:", data)
     return None

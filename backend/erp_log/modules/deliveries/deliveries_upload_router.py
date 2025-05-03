@@ -88,11 +88,7 @@ async def upload_pdfs(
         campos = extract_nfe_fields(texto_extraido)
         coordenadas = None
         if campos.get("cep") and campos.get("cep") != "full":
-            coordenadas = get_coordinates(
-                campos.get("cep"),
-                campos.get("municipio"),
-                campos.get("uf")
-            )
+            coordenadas = get_coordinates(campos.get("cep"))
 
         nova_entrega = DeliveryCreate(
             numero_nota=campos.get("numero_nota"),
